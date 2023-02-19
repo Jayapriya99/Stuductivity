@@ -3,12 +3,16 @@ import { auth, provider } from '../../firebase-config';
 import { signInWithPopup, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { createTheme } from '@mui/system';
 import { 
   Card, 
   Grid,
-  TextField,
+  Input,
   FormControlLabel,
-  Paper, } from '@mui/material';
+  Paper,
+  ThemeProvider,
+  TextField,
+  CardContent, } from '@mui/material';
 
 
 function Login({ setIsAuth }) {
@@ -44,29 +48,46 @@ function Login({ setIsAuth }) {
       }
   };
 
+  const theme = createTheme({
+    palette: {
+      secondary: {
+        main: '#C4A69B'
+      }
+    }
+  })
+
   return (
+    
     <div className='LoginPage'>
-      {/* <Grid
+      <Grid
       container
-      spacing={0}
       direction="column"
       alignItems="center"
-      justify="center">
+      justifyContent="center">
+      {/* <ThemeProvider theme={theme}> */}
       <Card
-        container
+        display="flex" 
         sx={{ maxWidth: 500 }}
         style={{ height: 500, width: 500}}
         alignItems="center"
-        spacing={3}
         direction="column"
-        justify="center">
-
+        justifyContent="center">
+          <CardContent
+          justifyContent="center"
+          alignItems="center"
+          sx={{ maxWidth: 500 }}
+          style={{ height: 500, width: 500}}
+          >
           <Grid item xs={12} >
-            <TextField label="Email Address" onChange={(event) => setLoginEmail(event.target.value)}></TextField>
+            <TextField 
+            placeholder='Email Address' 
+            style={{ width: 200}}
+            onChange={(event) => setLoginEmail(event.target.value)}
+             />
           </Grid>
 
           <Grid item xs={12}>
-            <TextField label="Password" type={'password'}> onChange={(event) => setLoginPassword(event.target.value)}</TextField>
+            <TextField placeholder='Password' onChange={(event) => setLoginPassword(event.target.value)}/>
           </Grid>
 
           <Grid>
@@ -76,13 +97,16 @@ function Login({ setIsAuth }) {
           <Grid>
             <button className='loginWithGoogle' onClick={signInWithGoogle} style={{margin:10}}> Sign in with Google </button>
           </Grid>
+          </CardContent>
       </Card>
-      </Grid> */}
+      {/* </ThemeProvider> */}
 
-      <input placeholder='Email Address' onChange={(event) => setLoginEmail(event.target.value)}/>
-      <input placeholder='Password' onChange={(event) => setLoginPassword(event.target.value)}/>
+      </Grid>
+{/* 
+      <Input placeholder='Email Address' onChange={(event) => setLoginEmail(event.target.value)}/>
+      <Input placeholder='Password' onChange={(event) => setLoginPassword(event.target.value)}/> */}
 
-      <button onClick={loginWithEmail}> Login </button>
+      {/* <button onClick={loginWithEmail}> Login </button> */}
     </div>
   )
 }

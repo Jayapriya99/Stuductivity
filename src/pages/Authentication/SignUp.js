@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Login from './Login';
 import { auth } from '../../firebase-config';
 import { 
@@ -12,6 +13,7 @@ import {
 
 function SignUp() {
 
+  let navigate = useNavigate();
   const [signUpEmail, setSignUpEmail] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
 
