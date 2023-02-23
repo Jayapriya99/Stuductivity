@@ -27,15 +27,15 @@ function App() {
   return (
     <Router>
       <nav>
-        {/* <Link to="/Notes"> Notes </Link>
+        {!isAuth ? <Link to="/Login" > Login </Link> : <button onClick={signUserOut}> Sign Out </button>}
+        {!isAuth ? <Link to="/SignUp" > SignUp </Link> : <button onClick={signUserOut}> Sign Out </button>}
+        <Link to="/Notes"> Notes </Link>
         <Link to="/Calendar"> Calendar </Link>        
         <Link to="/Reminders"> Reminders </Link>  
         <Link to="/Journal"> Journal </Link>  
-        <Link to="/Profile"> Profile </Link>   */}
-        {!isAuth ? <Link to="/Login" > Login </Link> : <button onClick={signUserOut}> Sign Out </button>}
-        {!isAuth ? <Link to="/SignUp" > SignUp </Link> : <button onClick={signUserOut}> Sign Out </button>}
+        <Link to="/Profile"> Profile </Link>  
 
-      </nav>
+      </nav> 
       <Routes>
         <Route path="/Notes" element={<Notes />} />
         <Route path="/Login" element={<Login setIsAuth={setIsAuth}/>} />

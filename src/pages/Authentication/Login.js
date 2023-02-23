@@ -8,11 +8,12 @@ import {
   Card, 
   Grid,
   Input,
-  FormControlLabel,
-  Paper,
+  Typography,
+  Link,
   ThemeProvider,
   TextField,
-  CardContent, } from '@mui/material';
+  CardContent,
+  Button, } from '@mui/material';
 
 
 function Login({ setIsAuth }) {
@@ -56,6 +57,10 @@ function Login({ setIsAuth }) {
     }
   })
 
+  const GoToSignUp = async() => {
+    navigate("/SignUp");
+  }
+
   return (
     
     <div className='LoginPage'>
@@ -63,7 +68,10 @@ function Login({ setIsAuth }) {
       container
       direction="column"
       alignItems="center"
-      justifyContent="center">
+      justifyContent="center"
+      style={{ paddingTop:100}}
+      >
+        
       {/* <ThemeProvider theme={theme}> */}
       <Card
         display="flex" 
@@ -78,30 +86,43 @@ function Login({ setIsAuth }) {
           sx={{ maxWidth: 500 }}
           style={{ height: 500, width: 500}}
           >
+          <Typography style={{paddingLeft:170}} variant="h4">  LOGIN </Typography>
           <Grid item xs={12} >
             <TextField 
             placeholder='Email Address' 
-            style={{ width: 200}}
+            style={{width:400, padding:30}}
             onChange={(event) => setLoginEmail(event.target.value)}
              />
           </Grid>
 
           <Grid item xs={12}>
-            <TextField placeholder='Password' onChange={(event) => setLoginPassword(event.target.value)}/>
+            <TextField style={{width:400, paddingLeft:30, paddingRight:30, paddingTop:10, paddingBottom:10}} placeholder='Password' onChange={(event) => setLoginPassword(event.target.value)}/>
           </Grid>
 
           <Grid>
-            <button className='login' style={{margin:10}} onClick={loginWithEmail}> Sign in </button>
+            <Button style={{marginLeft:170, marginBottom:20, marginTop:20}} variant="contained" className='login' onClick={loginWithEmail}> Sign in </Button>
           </Grid>
           
           <Grid>
-            <button className='loginWithGoogle' onClick={signInWithGoogle} style={{margin:10}}> Sign in with Google </button>
+            <Button style={{marginLeft:120, marginBottom:20}}  variant="contained" className='loginWithGoogle' onClick={signInWithGoogle} > Sign in with Google </Button>
+          </Grid>
+
+          <Grid>
+            <Typography 
+            style={{width:400, paddingLeft:130, paddingRight:30, paddingTop:10, paddingBottom:10}}
+            > Do not have an account?
+            <Link onClick={GoToSignUp}>
+            <Typography navigate={'/SignUp'}> Register here now! </Typography>
+            </Link>
+            </Typography>
           </Grid>
           </CardContent>
       </Card>
       {/* </ThemeProvider> */}
 
       </Grid>
+
+      
 {/* 
       <Input placeholder='Email Address' onChange={(event) => setLoginEmail(event.target.value)}/>
       <Input placeholder='Password' onChange={(event) => setLoginPassword(event.target.value)}/> */}
