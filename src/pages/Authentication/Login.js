@@ -96,7 +96,11 @@ function Login({ setIsAuth }) {
           </Grid>
 
           <Grid item xs={12}>
-            <TextField style={{width:400, paddingLeft:30, paddingRight:30, paddingTop:10, paddingBottom:10}} placeholder='Password' onChange={(event) => setLoginPassword(event.target.value)}/>
+            <TextField 
+            style={{width:400, paddingLeft:30, paddingRight:30, paddingTop:10, paddingBottom:10}} 
+            placeholder='Password' 
+            onChange={(event) => setLoginPassword(event.target.value)}
+            type="password"/>
           </Grid>
 
           <Grid>

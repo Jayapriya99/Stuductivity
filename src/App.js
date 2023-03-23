@@ -10,7 +10,8 @@ import SignUp from './pages/Authentication/SignUp';
 import Reminders from './pages/Reminders/Reminders';
 import { useState } from 'react';
 import { signOut } from 'firebase/auth'
-import { auth } from './firebase-config';
+import { auth, database, app } from './firebase-config';
+import Docs from './pages/Notes/docs';
 
 function App() {
 
@@ -37,7 +38,8 @@ function App() {
 
       </nav> 
       <Routes>
-        <Route path="/Notes" element={<Notes />} />
+        <Route path="/Notes" element={<Notes database = {database} />} />
+        <Route path="/Docs" element={<Docs />} />
         <Route path="/Login" element={<Login setIsAuth={setIsAuth}/>} />
         <Route path="/Calendar" element={<Calendar />} />
         <Route path="/ForgetPassword" element={<ForgetPassword />} />

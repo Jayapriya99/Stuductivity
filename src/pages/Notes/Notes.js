@@ -1,6 +1,10 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { database } from '../../firebase-config';
+import { collection, addDoc, onSnapshot} from 'firebase/firestore';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { 
   Card, 
   IconButton,
@@ -24,11 +28,49 @@ const style = {
   p: 4,
 };
 
-export default function Notes() {
+export default function Notes(
+    {database}
+) {
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+    let databaseCollection = collection(database, 'notes-data')
+    let userEmail = localStorage.getItem('loginEmail')
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const [title, setTitle] = useState('');
+    const [notesData, setNotesData] = useState([]);
+
+    const addNotes = () => {
+        addDoc(databaseCollection, {
+        title: title,
+        author: userEmail,
+        body: '',
+
+    })
+    .then((response) => {
+        toast.success('Notes added', {
+          autoClose: 1000
+        })
+        setTitle('');
+        setOpen(false);
+    })
+    .catch(() => {
+        toast.error('Notes cannot be added', {
+          autoClose: 1000
+        })
+    })
+
+    }
+
+    useEffect(() => {
+      onSnapshot(databaseCollection, (response) => {
+        setNotesData(response.docs.map((doc) => {
+          return {...doc.data(), id: doc.id}
+        }))
+      })
+    }, [])
+
 
   return (
     <div>
@@ -39,6 +81,8 @@ export default function Notes() {
       <Modal
         open={open}
         onClose={handleClose}
+        // title={title}
+        // setTitle={setTitle}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -48,12 +92,42 @@ export default function Notes() {
           </Typography>
           <Box>
             <Card>
-              <TextField variant="outlined" multiline rows={12} style={{width: 400}}/>
-              <Button variant='contained'> ADD </Button>
+              <TextField
+              placeholder='Add the Title'
+              className='add-input'
+              onChange={(event) => setTitle(event.target.value)}
+              value={title}>
+                
+              </TextField>
+              <TextField 
+              variant="outlined" 
+              multiline rows={10} 
+              style={{width: 400}}
+              // value={body}
+              />
+              <Button 
+              onClick={addNotes}
+              variant='contained'
+              > ADD </Button>
             </Card>
           </Box>
         </Box>
       </Modal>
+      <ToastContainer/>
+    
+      <div className='grid-1'>
+        {notesData.map((doc) => {
+          return (
+            <div className='grid-2'>
+              <h3>
+                {doc.title}
+              </h3>
+            </div>
+          )
+        })}
+      </div>
+
     </div>
+    
   )
 }
