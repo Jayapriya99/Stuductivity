@@ -11,7 +11,7 @@ import Reminders from './pages/Reminders/Reminders';
 import { useState } from 'react';
 import { signOut } from 'firebase/auth'
 import { auth, database, app } from './firebase-config';
-import Docs from './pages/Notes/docs';
+import EditNotes from './pages/Notes/EditNotes';
 
 function App() {
 
@@ -34,12 +34,13 @@ function App() {
         <Link to="/Calendar"> Calendar </Link>        
         <Link to="/Reminders"> Reminders </Link>  
         <Link to="/Journal"> Journal </Link>  
-        <Link to="/Profile"> Profile </Link>  
+        <Link to="/Profile"> Profile </Link> 
+ 
 
       </nav> 
       <Routes>
         <Route path="/Notes" element={<Notes database = {database} />} />
-        <Route path="/Docs" element={<Docs />} />
+        <Route path="/EditNotes/:id" element={<EditNotes database = {database} />} />
         <Route path="/Login" element={<Login setIsAuth={setIsAuth}/>} />
         <Route path="/Calendar" element={<Calendar />} />
         <Route path="/ForgetPassword" element={<ForgetPassword />} />
@@ -47,6 +48,7 @@ function App() {
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Reminders" element={<Reminders />} />
         <Route path="/Journal" element={<Journal />} />
+        
         </Routes>
     </Router>
   );

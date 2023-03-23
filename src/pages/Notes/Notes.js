@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import EditNotes from './EditNotes';
 import { database } from '../../firebase-config';
 import { collection, addDoc, onSnapshot} from 'firebase/firestore';
 import { ToastContainer, toast } from 'react-toastify';
@@ -21,7 +22,7 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  height: 400,
+  height: 130,
   bgcolor: 'background.paper',
   border: '1px solid #000',
   boxShadow: 24,
@@ -32,8 +33,9 @@ export default function Notes(
     {database}
 ) {
 
-    let databaseCollection = collection(database, 'notes-data')
-    let userEmail = localStorage.getItem('loginEmail')
+    let databaseCollection = collection(database, 'notes-data');
+    let userEmail = localStorage.getItem('loginEmail');
+    let navigate = useNavigate();
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -63,6 +65,10 @@ export default function Notes(
 
     }
 
+    const openEditNotes = (id) => {
+      navigate(`/EditNotes/${id}`)
+    }
+
     useEffect(() => {
       onSnapshot(databaseCollection, (response) => {
         setNotesData(response.docs.map((doc) => {
@@ -81,8 +87,6 @@ export default function Notes(
       <Modal
         open={open}
         onClose={handleClose}
-        // title={title}
-        // setTitle={setTitle}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -99,12 +103,12 @@ export default function Notes(
               value={title}>
                 
               </TextField>
-              <TextField 
+              {/* <TextField 
               variant="outlined" 
               multiline rows={10} 
               style={{width: 400}}
               // value={body}
-              />
+              /> */}
               <Button 
               onClick={addNotes}
               variant='contained'
@@ -118,7 +122,7 @@ export default function Notes(
       <div className='grid-1'>
         {notesData.map((doc) => {
           return (
-            <div className='grid-2'>
+            <div className='grid-2' onClick={() => openEditNotes(doc.id)}>
               <h3>
                 {doc.title}
               </h3>
