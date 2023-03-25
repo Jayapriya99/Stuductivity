@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import EditNotes from './EditNotes';
-import { database } from '../../firebase-config';
 import { collection, addDoc, onSnapshot} from 'firebase/firestore';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -64,6 +62,8 @@ export default function Notes(
     })
 
     }
+
+    
 
     const openEditNotes = (id) => {
       navigate(`/EditNotes/${id}`)

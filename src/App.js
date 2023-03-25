@@ -12,6 +12,7 @@ import { useState } from 'react';
 import { signOut } from 'firebase/auth'
 import { auth, database, app } from './firebase-config';
 import EditNotes from './pages/Notes/EditNotes';
+import EditJournal from './pages/Journal/EditJournal';
 
 function App() {
 
@@ -47,7 +48,9 @@ function App() {
         <Route path="/Profile" element={<Profile />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Reminders" element={<Reminders />} />
-        <Route path="/Journal" element={<Journal />} />
+        <Route path="/Journal" element={<Journal database = {database} />} />
+        <Route path="/EditJournal/:id" element={<EditJournal database = {database} />} />
+
         
         </Routes>
     </Router>

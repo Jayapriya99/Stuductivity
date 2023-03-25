@@ -7,46 +7,46 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Button } from '@mui/material';
 
-export default function EditNotes({
+export default function EditJournal({
     database
 }) {
 
     let params = useParams();
-    let databaseCollection = collection(database, 'notes-data');
+    let journalCollection = collection(database, 'journal-data');
     let navigate = useNavigate();
-    const [notesData, setNotesData] = useState('');
+    const [journalData, setJournalData] = useState('');
     const [title, setTitle] = useState('');
 
-    const getNotesData = (value) => {
-        setNotesData(value);
+    const getJournalData = (value) => {
+        setJournalData(value);
     };
 
     useEffect(() => {
-        const updateNotes = setTimeout(() => {
-            const notesToUpdate = doc(databaseCollection, params.id);
+        const updateJournal = setTimeout(() => {
+            const journalToUpdate = doc(journalCollection, params.id);
 
-            updateDoc(notesToUpdate, {
-                body: notesData
+            updateDoc(journalToUpdate, {
+                body: journalData
             })
                 .then(() => {
-                    toast.success('Notes updated', {
+                    toast.success('Journal updated', {
                         autoClose:1000
                     })
                 })
                 .catch(() => {
-                    toast.error('Cannot update notes', {
+                    toast.error('Cannot update Journal', {
                         autoClose:1000
                     })
                 })
         }, 2000);
-        return () => clearTimeout(updateNotes);
-    }, [notesData]);
+        return () => clearTimeout(updateJournal);
+    }, [journalData]);
 
     useEffect(() => {
-        const noteDocument = doc(databaseCollection, params.id)
-        onSnapshot(noteDocument, (docs) => {
+        const journalDocument = doc(journalCollection, params.id)
+        onSnapshot(journalDocument, (docs) => {
             setTitle(docs.data().title);
-            setNotesData(docs.data().body);
+            setJournalData(docs.data().body);
         })
 
     }, [])
@@ -70,13 +70,13 @@ export default function EditNotes({
     return (
         <div>
             <ToastContainer/>
-            <Button onClick={() => navigate('/Notes')} className='backButton'>
+            <Button onClick={() => navigate('/Journal')} className='backButton'>
                 Back
             </Button>
             <h3> {title} </h3>
             <ReactQuill
-                value={notesData}
-                onChange={getNotesData}
+                value={journalData}
+                onChange={getJournalData}
             />
             {/* <Button onClick={deleteNote}> Delete </Button> */}
         </div>
