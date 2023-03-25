@@ -51,20 +51,21 @@ export default function EditJournal({
 
     }, [])
 
-    // const deleteNote = () => {
-    //     deleteDoc(databaseCollection, params.id)
-    //         .then(() => {
-    //             toast.success('Notes deleted', {
-    //                 autoClose:1000
-    //             })
-    //         })
-    //         .catch(() => {
-    //             toast.error('Cannot delete notes', {
-    //                 autoClose:1000
-    //             })
-    //         })
-    //     }
-
+    const journalDelete = () => {
+        let deleteJournal = doc(journalCollection, params.id)
+        deleteDoc(deleteJournal)
+        .then((response) => {
+            alert('Journal deleted', {
+            autoClose: 1000
+            })
+            navigate('/Journal')
+        })
+        .catch(() => {
+            alert('Journal cannot be deleted', {
+            autoClose: 1000
+            })
+        })
+    }
     
 
     return (
@@ -78,7 +79,7 @@ export default function EditJournal({
                 value={journalData}
                 onChange={getJournalData}
             />
-            {/* <Button onClick={deleteNote}> Delete </Button> */}
+            <Button onClick={journalDelete}> Delete </Button>
         </div>
     )
 }

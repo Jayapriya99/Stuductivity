@@ -51,6 +51,22 @@ export default function EditNotes({
 
     }, [])
 
+    const noteDelete = () => {
+        let deleteNotes = doc(databaseCollection, params.id)
+        deleteDoc(deleteNotes)
+        .then((response) => {
+            toast.success('Notes deleted', {
+            autoClose: 1000
+            })
+            navigate('/Notes')
+        })
+        .catch(() => {
+            toast.error('Notes cannot be deleted', {
+            autoClose: 1000
+            })
+        })
+    }
+
     // const deleteNote = () => {
     //     deleteDoc(databaseCollection, params.id)
     //         .then(() => {
@@ -78,7 +94,7 @@ export default function EditNotes({
                 value={notesData}
                 onChange={getNotesData}
             />
-            {/* <Button onClick={deleteNote}> Delete </Button> */}
+            <Button onClick={noteDelete}> Delete </Button>
         </div>
     )
 }
