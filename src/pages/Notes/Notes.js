@@ -6,13 +6,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { 
   Card, 
-  IconButton,
   Box,
   Typography,
   Modal, 
   TextField,
+  Grid,
   Button}from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import SearchIcon from '@mui/icons-material/Search';
 
 const style = {
   position: 'absolute',
@@ -20,12 +21,20 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  height: 130,
+  height: 150,
   bgcolor: 'background.paper',
   border: '1px solid #000',
   boxShadow: 24,
   p: 4,
 };
+
+const styleCenter = {
+  top: '50%',
+  right: '50%',
+  left: '50%',
+  transform: 'translate(42%, 50%)',
+  p: 1
+}
 
 export default function Notes(
     {database}
@@ -40,6 +49,7 @@ export default function Notes(
     const handleClose = () => setOpen(false);
     const [title, setTitle] = useState('');
     const [notesData, setNotesData] = useState([]);
+    const [search, setSearch] = useState("");
 
     const addNotes = () => {
         addDoc(databaseCollection, {
@@ -77,12 +87,39 @@ export default function Notes(
       })
     }, [])
 
+    // const searchNotes = (e) => {
+    //   e.preventDefault();
+    //   setNotesData(doc.filter((doc) => 
+    //     doc.title.toLowerCase().includes(search.toLowerCase())
+    //   ))
+    // }
+    
 
   return (
     <div>
-      <IconButton onClick={handleOpen} aria-label="AddCircleOutlineIcon" size="large" style={{color: "#C4A69B"}}>
-      <AddCircleOutlineIcon fontSize='large' />
-      </IconButton>
+      <Box sx={styleCenter}
+      >
+      <Button 
+      style={{width:200, height:50}}
+      variant="contained" 
+      endIcon={<AddCircleOutlineIcon />}
+      onClick={handleOpen}
+      size='large'>
+          Add Notes
+      </Button>
+      </Box>
+      {/* <form>
+        <TextField
+        onChange={(e) => {setSearch(e.target.value)}}>
+            Search for notes...
+        </TextField>
+        <Button 
+        endIcon={<SearchIcon />}
+        size='extra-large'
+        type='submit'
+        > 
+        </Button>
+      </form> */}
 
       <Modal
         open={open}
@@ -91,7 +128,12 @@ export default function Notes(
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography 
+          className='title-add'
+          id="modal-modal-title" 
+          variant="h6" 
+          component="h2"
+          >
             Add a new subject
           </Typography>
           <Box>
@@ -101,15 +143,9 @@ export default function Notes(
               className='add-input'
               onChange={(event) => setTitle(event.target.value)}
               value={title}>
-                
               </TextField>
-              {/* <TextField 
-              variant="outlined" 
-              multiline rows={10} 
-              style={{width: 400}}
-              // value={body}
-              /> */}
               <Button 
+              className='btn-add'
               onClick={addNotes}
               variant='contained'
               > ADD </Button>

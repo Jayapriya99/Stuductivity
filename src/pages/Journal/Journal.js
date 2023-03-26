@@ -14,6 +14,7 @@ import {
   TextField,
   Button}from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { DatePicker } from '@mui/x-date-pickers';
 
 const style = {
   position: 'absolute',
@@ -27,6 +28,14 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
+const styleCenter = {
+  top: '50%',
+  right: '50%',
+  left: '50%',
+  transform: 'translate(42%, 50%)',
+  p: 1
+}
 
 
 export default function Journal({
@@ -78,9 +87,17 @@ useEffect(() => {
 
   return (
     <div>
-      <IconButton onClick={handleOpen} aria-label="AddCircleOutlineIcon" size="large" style={{color: "#C4A69B"}}>
-      <AddCircleOutlineIcon fontSize='large' />
-      </IconButton>
+      <Box sx={styleCenter}
+      >
+      <Button 
+      style={{width:200, height:50}}
+      variant="contained" 
+      endIcon={<AddCircleOutlineIcon />}
+      onClick={handleOpen}
+      size='large'>
+          Add Notes
+      </Button>
+      </Box>
 
       <Modal
         open={open}
@@ -89,7 +106,7 @@ useEffect(() => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="modal-modal-title" variant="h6" component="h2" size='large'>
             Add a new Journal
           </Typography>
           <Box>
@@ -99,10 +116,11 @@ useEffect(() => {
               type="date"
               className='add-input'
               onChange={(event) => setTitle(event.target.value)}
-              value={title}>
-                
+              value={title}
+              >
               </TextField>              
               <Button 
+              className='btn-add'
               variant='contained'
               onClick={addJournal}
               > ADD </Button>

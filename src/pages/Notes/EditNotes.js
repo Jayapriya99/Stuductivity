@@ -5,7 +5,9 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Button } from '@mui/material';
+import { Button, Box } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function EditNotes({
     database
@@ -20,6 +22,7 @@ export default function EditNotes({
     const getNotesData = (value) => {
         setNotesData(value);
     };
+
 
     useEffect(() => {
         const updateNotes = setTimeout(() => {
@@ -55,13 +58,13 @@ export default function EditNotes({
         let deleteNotes = doc(databaseCollection, params.id)
         deleteDoc(deleteNotes)
         .then((response) => {
-            toast.success('Notes deleted', {
+            alert('Notes deleted', {
             autoClose: 1000
             })
             navigate('/Notes')
         })
         .catch(() => {
-            toast.error('Notes cannot be deleted', {
+            alert('Notes cannot be deleted', {
             autoClose: 1000
             })
         })
@@ -86,15 +89,53 @@ export default function EditNotes({
     return (
         <div>
             <ToastContainer/>
-            <Button onClick={() => navigate('/Notes')} className='backButton'>
+            {/* <Button onClick={() => navigate('/Notes')} className='backButton'>
                 Back
-            </Button>
-            <h3> {title} </h3>
+            </Button> */}
+            {/* <Box sx={buttonStyle}
+            > */}
+            
+            {/* </Box> */}
+            <h3 className='title-header'> {title} </h3>
             <ReactQuill
+                className='react-quill'
                 value={notesData}
                 onChange={getNotesData}
             />
-            <Button onClick={noteDelete}> Delete </Button>
+            {/* <Button onClick={noteDelete}> Delete </Button> */}
+            <Button 
+                className='deleteButton'
+                style={{
+                    width:100, 
+                    height:50,
+                    bottom: 10,
+                    left: "98%",
+                    marginLeft: -100,
+                    position: "relative"
+                }}
+                variant="contained" 
+                endIcon={<DeleteIcon />}
+                onClick={noteDelete}
+                size='large'>
+                Delete
+            </Button>
+
+            <Button 
+                className='backButton'
+                style={{
+                    width:100, 
+                    height:50,
+                    bottom: 10,
+                    left: "9%",
+                    marginLeft: -100,
+                    position: "relative"
+                }}
+                variant="contained" 
+                startIcon={<ArrowBackIcon />}
+                onClick={() => navigate('/Notes')}
+                size='large'>
+                Back
+            </Button>
         </div>
     )
 }
