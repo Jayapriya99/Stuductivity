@@ -45,6 +45,7 @@ function Login({ setIsAuth }) {
         navigate("/Notes");
         console.log(user);
       } catch (error) {
+        alert('Incorrect email or password')
         console.log(error.message);
       }
   };
@@ -60,6 +61,11 @@ function Login({ setIsAuth }) {
   const GoToSignUp = async() => {
     navigate("/SignUp");
   }
+
+  if (!user) {
+    navigate("/Login");
+  }
+ 
 
   return (
     
@@ -86,7 +92,7 @@ function Login({ setIsAuth }) {
           sx={{ maxWidth: 500 }}
           style={{ height: 500, width: 500}}
           >
-          <Typography style={{paddingLeft:170}} variant="h4">  LOGIN </Typography>
+          <Typography className='title-login' style={{paddingLeft:170}} variant="h4">  LOGIN </Typography>
           <Grid item xs={12} >
             <TextField 
             placeholder='Email Address' 

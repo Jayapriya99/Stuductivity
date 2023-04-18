@@ -7,7 +7,7 @@ import Calendar from './pages/Calendar/Calendar';
 import ForgetPassword from './pages/Authentication/ForgetPassword';
 import Profile from './pages/Profile/Profile';
 import SignUp from './pages/Authentication/SignUp';
-import Reminders from './pages/Reminders/Reminders';
+import ToDo from './pages/ToDo/ToDo';
 import { useState } from 'react';
 import { signOut } from 'firebase/auth'
 import { auth, database, app } from './firebase-config';
@@ -30,14 +30,12 @@ function App() {
     <Router>
       <nav>
         {!isAuth ? <Link to="/Login" > Login </Link> : <button onClick={signUserOut}> Sign Out </button>}
-        {!isAuth ? <Link to="/SignUp" > SignUp </Link> : <button onClick={signUserOut}> Sign Out </button>}
+        {/* {!isAuth ? <Link to="/SignUp" > SignUp </Link> : <button onClick={signUserOut}> Sign Out </button>} */}
         <Link to="/Notes"> Notes </Link>
         <Link to="/Calendar"> Calendar </Link>        
-        <Link to="/Reminders"> Reminders </Link>  
+        <Link to="/ToDo"> To-do </Link>  
         <Link to="/Journal"> Journal </Link>  
         <Link to="/Profile"> Profile </Link> 
- 
-
       </nav> 
       <Routes>
         <Route path="/Notes" element={<Notes database = {database} />} />
@@ -47,7 +45,7 @@ function App() {
         <Route path="/ForgetPassword" element={<ForgetPassword />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/Reminders" element={<Reminders />} />
+        <Route path="/ToDo" element={<ToDo />} />
         <Route path="/Journal" element={<Journal database = {database} />} />
         <Route path="/EditJournal/:id" element={<EditJournal database = {database} />} />
 

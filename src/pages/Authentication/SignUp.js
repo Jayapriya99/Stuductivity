@@ -35,6 +35,10 @@ function SignUp() {
     }
   }
 
+  const GoToLogin = async() => {
+    navigate("/Login");
+  }
+
   return (
     <div className='SignUpPage'>
       <Grid
@@ -59,7 +63,7 @@ function SignUp() {
           sx={{ maxWidth: 500 }}
           style={{ height: 500, width: 500}}
           >
-          <Typography style={{paddingLeft:170}} variant="h4">  SIGN UP  </Typography>
+          <Typography className='title-login' style={{paddingLeft:170}} variant="h4">  SIGN UP  </Typography>
           <Grid item xs={12} >
             <TextField 
             placeholder='Email Address' 
@@ -80,17 +84,20 @@ function SignUp() {
             <Button style={{marginLeft:170, marginBottom:20, marginTop:20}} variant="contained" className='login' onClick={signUp}> Register </Button>
           </Grid>
           
-
-          {/* <Grid>
-            <Typography 
+          <Grid>
+          <Typography 
             style={{width:400, paddingLeft:130, paddingRight:30, paddingTop:10, paddingBottom:10}}
-            > Do not have an account?
-            <Typography navigate={'/SignUp'}> Register here now! </Typography>
+            > Already have an account?
+            <Link onClick={GoToLogin}>
+            <Typography 
+            style={{width:400, paddingLeft:50, paddingRight:30, paddingTop:10, paddingBottom:10}}
+            navigate={'/Login'}> Login here </Typography>
+            </Link>
             </Typography>
-          </Grid> */}
+          </Grid>
+
           </CardContent>
       </Card>
-      {/* </ThemeProvider> */}
 
       </Grid>
       

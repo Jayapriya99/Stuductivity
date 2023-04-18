@@ -95,7 +95,7 @@ useEffect(() => {
       endIcon={<AddCircleOutlineIcon />}
       onClick={handleOpen}
       size='large'>
-          Add Notes
+          Add Journal
       </Button>
       </Box>
 
