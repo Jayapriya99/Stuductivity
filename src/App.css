@@ -127,6 +127,17 @@ a {
   padding-right: 50px;
 }
 
+.grid-3{
+  margin-top: 30px;
+  margin-left: 200px;
+  width: 1000px;
+  border: 10px ;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: auto ;
+  gap: 10px
+}
+
 /* .backButton{
   margin-top: 20px;
   margin-bottom: 20px;

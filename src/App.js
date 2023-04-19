@@ -45,7 +45,7 @@ function App() {
         <Route path="/ForgetPassword" element={<ForgetPassword />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/ToDo" element={<ToDo />} />
+        <Route path="/ToDo" element={<ToDo database = {database}/>} />
         <Route path="/Journal" element={<Journal database = {database} />} />
         <Route path="/EditJournal/:id" element={<EditJournal database = {database} />} />
 
