@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { collection, addDoc, onSnapshot} from 'firebase/firestore';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { format } from 'date-fns';
 
 import { 
   Card, 
@@ -50,6 +51,12 @@ export default function Journal({
   const handleClose = () => setOpen(false);
   const [title, setTitle] = useState('');
   const [journalData, setJournalData] = useState([]);
+
+  const getDateInWords = (dateString) => {
+    const date = new Date(dateString);
+    return format(date, 'd MMMM yyyy');
+  };
+  
 
   const addJournal = () => {
     addDoc(journalCollection, {
@@ -136,7 +143,7 @@ useEffect(() => {
           return (
             <div className='grid-2' onClick={() => openEditJournal(doc.id)}>
               <h3>
-                {doc.title}
+              {getDateInWords(doc.title)}
               </h3>
             </div>
           )
