@@ -8,6 +8,8 @@ import ForgetPassword from './pages/Authentication/ForgetPassword';
 import Profile from './pages/Profile/Profile';
 import SignUp from './pages/Authentication/SignUp';
 import ToDo from './pages/ToDo/ToDo';
+import AddToDo from './pages/ToDo/AddToDo';
+import EditTodo from './pages/ToDo/EditTodo';
 import { useState } from 'react';
 import { signOut } from 'firebase/auth'
 import { auth, database, app } from './firebase-config';
@@ -46,6 +48,8 @@ function App() {
         <Route path="/Profile" element={<Profile />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/ToDo" element={<ToDo database = {database}/>} />
+        <Route path="/AddToDo" element={<AddToDo database = {database}/>} />
+        <Route path="/EditTodo/:id" element={<EditTodo database = {database}/>} />
         <Route path="/Journal" element={<Journal database = {database} />} />
         <Route path="/EditJournal/:id" element={<EditJournal database = {database} />} />
 
