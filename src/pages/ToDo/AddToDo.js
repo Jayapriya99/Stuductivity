@@ -79,20 +79,21 @@ export default function AddToDo(
 
   return (
     <div>
-    <Box>
+    <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
       <TextField
-              placeholder='Add the Todo Title'
+              label='Add the Todo Title'
               className='add-input'
               onChange={(event) => setTitle(event.target.value)}
-              value={title || ''}>
+              value={title}
+              style={{ margin: 30, width: '800px' }}>
               </TextField>
               <TextField
               placeholder='Add the Date'
               type="date"
               className='add-input'
               onChange={(event) => setDate(event.target.value)}
-              value={date || ''}
-              format="LL"
+              value={date}
+              style={{marginBottom: 10, width: '800px' }}
               >
               </TextField>  
               <TextField
@@ -100,8 +101,8 @@ export default function AddToDo(
               type="time"
               className='add-input'
               onChange={(event) => setTime(event.target.value)}
-              value={time || ''}
-              format="LL"
+              value={time}
+              style={{marginTop: 20, width: '800px' }}
               >
               </TextField> 
       </Box>

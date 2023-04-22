@@ -11,9 +11,10 @@ import {
   Typography,
   Modal, 
   TextField,
-  Button}from '@mui/material';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+  Button,
+  IconButton}from '@mui/material';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -143,16 +144,22 @@ export default function ToDo(
               <Typography sx={{paddingLeft:5, paddingTop:2, paddingBottom:2, paddingRight: 20 }}>
                 {doc.time}
               </Typography>
-              <Button
+              <ModeEditIcon
+              variant='filled'
+              color="primary"
+              // startIcon={<ModeEditIcon />}
+              style={{cmarginRight: 20}}
               onClick={() => navigate(`/EditTodo/${doc.id}`)}
               >
-              EDIT
-              </Button>
-              <Button
+              </ModeEditIcon>
+              <DeleteIcon
+              variant='filled'
+              color="warning"
               onClick={() => TodoDelete(doc.id)}
+              style={{marginLeft: 20}}
               >
               DELETE
-              </Button>
+              </DeleteIcon>
 
             </Box>
           )

@@ -84,12 +84,13 @@ export default function EditTodo(
 
   return (
     <div>
-    <Box>
-    <TextField
-            placeholder='Add the Todo Title'
+    <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+        <TextField
+            label="Edit the Todo Title"
             className='add-input'
             onChange={getTitle}
-            value={title}>
+            value={title}
+            style={{ margin: 30, width: '800px' }}>
             </TextField>
             <TextField
             placeholder='Add the Date'
@@ -97,7 +98,7 @@ export default function EditTodo(
             className='add-input'
             onChange={getDate}
             value={date}
-            format="LL"
+            style={{marginBottom: 10, width: '800px' }}
             >
             </TextField>  
             <TextField
@@ -106,7 +107,7 @@ export default function EditTodo(
             className='add-input'
             onChange={getTime}
             value={time}
-            format="LL"
+            style={{ marginTop: 20,width: '800px' }}
             >
             </TextField> 
     </Box>
