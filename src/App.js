@@ -43,7 +43,7 @@ function App() {
         <Route path="/Notes" element={<Notes database = {database} />} />
         <Route path="/EditNotes/:id" element={<EditNotes database = {database} />} />
         <Route path="/Login" element={<Login setIsAuth={setIsAuth}/>} />
-        <Route path="/Calendar" element={<Calendar />} />
+        <Route path="/Calendar" element={<Calendar database = {database}/>} />
         <Route path="/ForgetPassword" element={<ForgetPassword />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/SignUp" element={<SignUp />} />
