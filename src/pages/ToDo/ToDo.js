@@ -1,19 +1,35 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { useNavigate} from 'react-router-dom';
-import { collection, onSnapshot, deleteDoc, doc} from 'firebase/firestore';
+import { useNavigate, useParams, Link } from 'react-router-dom';
+import { collection, addDoc, onSnapshot, updateDoc, deleteDoc, doc, getDoc} from 'firebase/firestore';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { format } from 'date-fns';
 import { 
+  Card, 
   Box,
   Typography,
-  Button
-}from '@mui/material';
+  Modal, 
+  TextField,
+  Button,
+  IconButton}from '@mui/material';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import SearchIcon from '@mui/icons-material/Search';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  height: 270,
+  bgcolor: 'background.paper',
+  border: '1px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 const styleCenter = {
   top: '50%',
@@ -28,19 +44,30 @@ export default function ToDo(
     {database}
 ) {
 
-    /* Create database collection */
     let todoCollection = collection(database, 'todo-data');
     let userEmail = localStorage.getItem('loginEmail');
     let navigate = useNavigate();
+    const {id} = useParams();
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const [title, setTitle] = useState('');
+    const [date, setDate] = useState('');
+    const [time, setTime] = useState('');
+    const [edit, setEdit] = useState('');
+    const [editdate, setEditDate] = useState('');
+    const [edittime, setEditTime] = useState('');
     const [todoData, setTodoData] = useState([]);
+    const [updateTodo, setUpdateTodo] = useState([]);
+    const [search, setSearch] = useState("");
 
-    /* Change date format to words */
     const getDateInWords = (dateString) => {
       const date = new Date(dateString);
       return format(date, 'd MMMM yyyy');
     };
     
-    /* Use effect to set the Todo Data */
+
+
     useEffect(() => {
       onSnapshot(todoCollection, (response) => {
         setTodoData(response.docs.map((doc) => {
@@ -50,7 +77,6 @@ export default function ToDo(
     }, [])
 
 
-    /* Delete Todo by id */
     const TodoDelete = async (id) => {
       let deleteTodo = doc(todoCollection, id)
       deleteDoc(deleteTodo)
@@ -121,15 +147,16 @@ export default function ToDo(
               <ModeEditIcon
               variant='filled'
               color="primary"
+              // startIcon={<ModeEditIcon />}
               style={{cmarginRight: 20}}
               onClick={() => navigate(`/EditTodo/${doc.id}`)}
               >
               </ModeEditIcon>
               <DeleteIcon
               variant='filled'
-              color='warning'
+              color="warning"
               onClick={() => TodoDelete(doc.id)}
-              style={{marginLeft: 20, marginRight: 10}}
+              style={{marginLeft: 20}}
               >
               DELETE
               </DeleteIcon>

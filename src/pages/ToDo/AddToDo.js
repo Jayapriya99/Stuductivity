@@ -1,13 +1,19 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { collection, addDoc, onSnapshot} from 'firebase/firestore';
-import { toast } from 'react-toastify';
+import { collection, addDoc, onSnapshot, updateDoc, deleteDoc, doc, getDoc} from 'firebase/firestore';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { 
+    Card, 
     Box,
+    Typography,
+    Modal, 
     TextField,
+    Table,
     Button}from '@mui/material';
+  import { LocalizationProvider } from '@mui/x-date-pickers';
+  import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
   import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
   import SearchIcon from '@mui/icons-material/Search';
 
@@ -24,31 +30,16 @@ export default function AddToDo(
     {database}
 ) {
 
-    /* Create database collection */
     let todoCollection = collection(database, 'todo-data');
     let userEmail = localStorage.getItem('loginEmail');
-
     let navigate = useNavigate();
-
     const [title, setTitle] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
     const {id} = useParams();
     const [todoData, setTodoData] = useState([]);
 
-    /* Add Todo */
     const addTodo = () => {
-
-        const now = new Date();
-        const selectedDateTime = new Date(`${date}T${time}`);
-        
-        if (selectedDateTime <= now) {
-          alert('Please select a valid date and time', {
-            autoClose: 2000
-          })
-          return;
-        }
-
         addDoc(todoCollection, {
         title: title, 
         author: userEmail,
@@ -73,7 +64,6 @@ export default function AddToDo(
 
     }
 
-    /* Display Todo Data */
     useEffect(() => {
         onSnapshot(todoCollection, (response) => {
           setTodoData(response.docs.map((doc) => {
@@ -81,6 +71,10 @@ export default function AddToDo(
           }))
         })
       }, [id])
+
+      const openEditTodo = (id) => {
+        navigate(`/EditTodo/${id}`)
+      }
 
 
   return (

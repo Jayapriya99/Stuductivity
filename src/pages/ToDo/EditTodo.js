@@ -1,13 +1,19 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { collection, onSnapshot, updateDoc,doc} from 'firebase/firestore';
+import { collection, addDoc, onSnapshot, updateDoc, deleteDoc, doc, getDoc} from 'firebase/firestore';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { 
+    Card, 
     Box,
+    Typography,
+    Modal, 
     TextField,
+    Table,
     Button}from '@mui/material';
+  import { LocalizationProvider } from '@mui/x-date-pickers';
+  import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
   import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
   import SearchIcon from '@mui/icons-material/Search';
 
@@ -116,7 +122,6 @@ export default function EditTodo(
         EDIT TODO
     </Button>
     </Box>
-    <ToastContainer/>
     
     </div>
   )

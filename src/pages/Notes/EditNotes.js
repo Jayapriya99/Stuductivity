@@ -69,6 +69,21 @@ export default function EditNotes({
             })
         })
     }
+
+    // const deleteNote = () => {
+    //     deleteDoc(databaseCollection, params.id)
+    //         .then(() => {
+    //             toast.success('Notes deleted', {
+    //                 autoClose:1000
+    //             })
+    //         })
+    //         .catch(() => {
+    //             toast.error('Cannot delete notes', {
+    //                 autoClose:1000
+    //             })
+    //         })
+    //     }
+
     
 
     return (
