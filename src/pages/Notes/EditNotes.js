@@ -5,7 +5,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Button, Box } from '@mui/material';
+import { Button } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -113,7 +113,7 @@ export default function EditNotes({
                     marginLeft: -100,
                     position: "relative"
                 }}
-                variant="contained" 
+                // variant="contained" 
                 endIcon={<DeleteIcon />}
                 onClick={noteDelete}
                 size='large'>
@@ -130,7 +130,7 @@ export default function EditNotes({
                     marginLeft: -100,
                     position: "relative"
                 }}
-                variant="contained" 
+                // variant="contained" 
                 startIcon={<ArrowBackIcon />}
                 onClick={() => navigate('/Notes')}
                 size='large'>

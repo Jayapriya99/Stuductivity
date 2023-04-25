@@ -6,6 +6,8 @@ import 'react-quill/dist/quill.snow.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Button } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function EditJournal({
     database
@@ -71,15 +73,42 @@ export default function EditJournal({
     return (
         <div>
             <ToastContainer/>
-            <Button onClick={() => navigate('/Journal')} className='backButton'>
-                Back
-            </Button>
+            
             <h3> {title} </h3>
             <ReactQuill
+                className='react-quill'
                 value={journalData}
                 onChange={getJournalData}
             />
-            <Button onClick={journalDelete}> Delete </Button>
+            <Button 
+            onClick={() => navigate('/Journal')} 
+            className='backButton'
+            style={{
+                width:100, 
+                height:50,
+                bottom: 10,
+                left: "9%",
+                marginLeft: -100,
+                position: "relative"
+            }}
+            // variant="contained" 
+            startIcon={<ArrowBackIcon />}
+            >
+                Back
+            </Button>
+            <Button 
+            onClick={journalDelete}
+            style={{
+                width:100, 
+                height:50,
+                bottom: 10,
+                left: "98%",
+                marginLeft: -100,
+                position: "relative"
+            }}
+            // variant="contained" 
+            endIcon={<DeleteIcon />}
+            > Delete </Button>
         </div>
     )
 }
