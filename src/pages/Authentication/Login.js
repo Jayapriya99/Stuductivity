@@ -7,7 +7,7 @@ import { createTheme } from '@mui/system';
 import { 
   Card, 
   Grid,
-  Input,
+  Dialog,
   Typography,
   Link,
   ThemeProvider,
@@ -23,9 +23,6 @@ function Login({ setIsAuth }) {
   const [loginPassword, setLoginPassword] = useState("");
   const [user, setUser] = useState({});
 
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  })
 
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider).then((result) => {

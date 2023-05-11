@@ -1,5 +1,9 @@
 import * as React from 'react';
 import signUserOut from '../../App';
+import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { auth } from '../../firebase-config';
+import { useEffect, useState } from "react";
 import { 
   Box, 
   TextField,
@@ -16,10 +20,21 @@ import {
 
 export default function Profile() {
 
+  const { user, isLoggedIn } = useAuth();
+  const [buttonClickedCount, setButtonClickedCount] = useState(0);
+  const navigate = useNavigate();
+
+  const signOut = () => {
+    auth.signOut();
+    navigate("/");
+  };
+
+  useEffect(() => {});
   // let userEmail = localStorage.getItem('loginEmail');
 
   return (
     <div>
+    
     <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
     <TextField
             label='User Email'

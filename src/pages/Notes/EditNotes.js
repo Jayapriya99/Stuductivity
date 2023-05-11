@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Button } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DeleteIcon from '@mui/icons-material/Delete';
+import DownloadIcon from '@mui/icons-material/Download';
 
 export default function EditNotes({
     database
@@ -23,7 +24,7 @@ export default function EditNotes({
         setNotesData(value);
     };
 
-
+    /* Update and Autosave Notes */
     useEffect(() => {
         const updateNotes = setTimeout(() => {
             const notesToUpdate = doc(databaseCollection, params.id);
@@ -41,10 +42,11 @@ export default function EditNotes({
                         autoClose:1000
                     })
                 })
-        }, 2000);
+        }, 1000);
         return () => clearTimeout(updateNotes);
     }, [notesData]);
 
+    /* Fetch Notes from database */
     useEffect(() => {
         const noteDocument = doc(databaseCollection, params.id)
         onSnapshot(noteDocument, (docs) => {
@@ -54,6 +56,7 @@ export default function EditNotes({
 
     }, [])
 
+    /* Function to delete notes */
     const noteDelete = () => {
         let deleteNotes = doc(databaseCollection, params.id)
         deleteDoc(deleteNotes)
@@ -70,31 +73,9 @@ export default function EditNotes({
         })
     }
 
-    // const deleteNote = () => {
-    //     deleteDoc(databaseCollection, params.id)
-    //         .then(() => {
-    //             toast.success('Notes deleted', {
-    //                 autoClose:1000
-    //             })
-    //         })
-    //         .catch(() => {
-    //             toast.error('Cannot delete notes', {
-    //                 autoClose:1000
-    //             })
-    //         })
-    //     }
-
-    
-
     return (
         <div>
             <ToastContainer/>
-            {/* <Button onClick={() => navigate('/Notes')} className='backButton'>
-                Back
-            </Button> */}
-            {/* <Box sx={buttonStyle}
-            > */}
-            
             {/* </Box> */}
             <h3 className='title-header'> {title} </h3>
             <ReactQuill
@@ -102,7 +83,6 @@ export default function EditNotes({
                 value={notesData}
                 onChange={getNotesData}
             />
-            {/* <Button onClick={noteDelete}> Delete </Button> */}
             <Button 
                 className='deleteButton'
                 style={{
@@ -135,6 +115,23 @@ export default function EditNotes({
                 onClick={() => navigate('/Notes')}
                 size='large'>
                 Back
+            </Button>
+
+            <Button 
+                className='backButton'
+                style={{
+                    width:150, 
+                    height:50,
+                    bottom: 10,
+                    left: "9%",
+                    marginLeft: 20,
+                    position: "relative"
+                }}
+                // variant="contained" 
+                startIcon={<DownloadIcon />}
+                // onClick={() => navigate('/Notes')}
+                size='large'>
+                PDF
             </Button>
         </div>
     )

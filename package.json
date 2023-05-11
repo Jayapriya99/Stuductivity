@@ -23,9 +23,12 @@
     "@testing-library/user-event": "^13.5.0",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
+    "file-saver": "^2.0.5",
     "firebase": "^9.16.0",
     "moment": "^2.29.4",
+    "quill-to-pdf": "^1.0.7",
     "react": "^18.2.0",
+    "react-calendar": "^4.2.1",
     "react-dom": "^18.2.0",
     "react-id-generator": "^3.0.2",
     "react-quill": "^2.0.0",
@@ -34,6 +37,7 @@
     "react-toastify": "^9.1.2",
     "styled-components": "^5.3.6",
     "uid": "^2.0.1",
+    "use-auth": "^0.1.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
