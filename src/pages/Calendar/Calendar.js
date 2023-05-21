@@ -1,89 +1,132 @@
-import React from 'react';
-import moment from 'moment';
-import { useState, useEffect } from 'react';
-import Calendar from 'react-calendar'; 
-import 'react-calendar/dist/Calendar.css'
-import { collection, addDoc, onSnapshot, updateDoc, deleteDoc, doc, getDoc} from 'firebase/firestore';
-import { useNavigate, useParams } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { 
-  Modal, 
-  Button, 
+import React, { useMemo } from "react";
+import moment from "moment";
+import { useState, useEffect } from "react";
+import Calendar from "react-calendar";
+// import "react-calendar/dist/Calendar.css";
+import "./calendar.css";
+
+import {
+  collection,
+  addDoc,
+  onSnapshot,
+  updateDoc,
+  deleteDoc,
+  doc,
+  getDoc,
+  query,
+  where,
+} from "firebase/firestore";
+import { useNavigate, useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import {
+  Modal,
+  Button,
   Box,
   Typography,
   Card,
-  TextField
-
- } from '@material-ui/core';
-import '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/core/styles';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+  TextField,
+} from "@material-ui/core";
+import "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import TodoTable from "./TodoTable";
+import { database } from "../../firebase-config";
 
 const styleCenter = {
-  top: '50%',
-  right: '50%',
-  left: '50%',
-  transform: 'translate(42%, 50%)',
-  p: 1
-}
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  width: 300,
-  height: 250,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
+  top: "50%",
+  right: "50%",
+  left: "50%",
+  transform: "translate(42%, 50%)",
+  p: 1,
 };
 
-export default function CalendarPage(
-  {database}
-) {
+export const calendarCollection = collection(database, "calendar-data");
+
+const DATE_FORMAT = "MM/DD/YYYY";
+
+export default function CalendarPage({ database }) {
   const [date, setDate] = useState(new Date());
-  const [title, setTitle] = useState('');
-  const [time, setTime] = useState('');
   const [calendarData, setCalendarData] = useState([]);
 
-  let calendarCollection = collection(database, 'calendar-data');
-  let userEmail = localStorage.getItem('loginEmail');
+  let userEmail = localStorage.getItem("loginEmail");
   let navigate = useNavigate();
 
   useEffect(() => {
-    onSnapshot(calendarCollection, (response) => {
-      setCalendarData(response.docs.map((doc) => {
-        return {...doc.data(), id: doc.id}
-      }))
-    })
-  }, [])
+    const unsubscribe = onSnapshot(
+      query(calendarCollection, where("author", "==", userEmail)),
+      (response) => {
+        setCalendarData(
+          response.docs.map((doc) => {
+            return { ...doc.data(), id: doc.id };
+          })
+        );
+      }
+    );
+    return () => unsubscribe();
+  }, []);
+
+  const tileClassName = ({ date }) => {
+    if (
+      calendarData.find(
+        (d) =>
+          moment(d.date).format(DATE_FORMAT) ===
+          moment(date).format(DATE_FORMAT)
+      )
+    ) {
+      return "selected-date";
+    }
+  };
+
+  const todoTableData = useMemo(
+    () =>
+      calendarData.filter(
+        (event) =>
+          moment(event.date).format(DATE_FORMAT) ===
+          moment(date).format(DATE_FORMAT)
+      ),
+    [date, calendarData]
+  );
 
   return (
-    <div>
+    <Box
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "2rem",
+        padding: "1rem",
+      }}
+    >
+      <Calendar onChange={setDate} value={date} tileClassName={tileClassName} />
 
-     <Calendar 
-     onChange={setDate} 
-     value={date}
-     />
-
-      Selected date: {date.toDateString()}
-
-      <Box sx={styleCenter}
+      <Box
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "1rem",
+        }}
       >
-      <Button 
-      style={{width:200, height:50}}
-      variant="contained" 
-      endIcon={<AddCircleOutlineIcon />}
-      onClick={() => navigate('/AddEvent')}      
-      size='large'>
-          Add Event
-      </Button>
+        Selected date: {date.toDateString()}
+        <Box sx={styleCenter}>
+          <Button
+            style={{ width: 200, height: 50 }}
+            variant="contained"
+            endIcon={<AddCircleOutlineIcon />}
+            onClick={() =>
+              navigate("/AddEvent", {
+                state: { date: moment(date).format("YYYY-MM-DD") },
+              })
+            }
+            size="large"
+          >
+            Add Event
+          </Button>
+        </Box>
       </Box>
-
-
+      <TodoTable data={todoTableData} />
       {/* <div className='grid-3'>
         {calendarData.map((doc) => {
           return (
@@ -134,8 +177,6 @@ export default function CalendarPage(
 
      
       </div> */}
-    </div>
-
-   
+    </Box>
   );
 }
