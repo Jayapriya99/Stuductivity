@@ -17,6 +17,7 @@ import EditNotes from './pages/Notes/EditNotes';
 import EditJournal from './pages/Journal/EditJournal';
 import AddEvent from './pages/Calendar/AddEvent';
 import EditEvent from './pages/Calendar/EditEvent';
+import TextSum from './pages/TextSummarisation/TextSummarizer';
 
 
 function App() {
@@ -34,12 +35,13 @@ function App() {
   return (
     <Router>
       <nav>
-        {!isAuth ? <Link to="/Login" > Login </Link> : <button onClick={signUserOut}> Sign Out </button>}
+        {/* {!isAuth ? <Link to="/Login" > Login </Link> : <button onClick={signUserOut}> Sign Out </button>} */}
         {/* {!isAuth ? <Link to="/SignUp" > SignUp </Link> : <button onClick={signUserOut}> Sign Out </button>} */}
         <Link to="/Notes"> Notes </Link>
         <Link to="/Calendar"> Calendar </Link>        
         <Link to="/ToDo"> To-do </Link>  
         <Link to="/Journal"> Journal </Link>  
+        <Link to="/TextSum"> Text Sum </Link>
         <Link to="/Profile"> Profile </Link> 
       </nav> 
       <Routes>
@@ -57,7 +59,7 @@ function App() {
         <Route path="/EditJournal/:id" element={<EditJournal database = {database} />} />
         <Route path="/AddEvent" element={<AddEvent database = {database}/>} />
         <Route path="/EditEvent/:id" element={<EditEvent database = {database}/>} />
-
+        <Route path="/TextSum" element={<TextSum />} />
 
         
         </Routes>
