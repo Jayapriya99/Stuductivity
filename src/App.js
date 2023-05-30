@@ -41,7 +41,7 @@ function App() {
         <Link to="/Calendar"> Calendar </Link>        
         <Link to="/ToDo"> To-do </Link>  
         <Link to="/Journal"> Journal </Link>  
-        <Link to="/TextSum"> Text Sum </Link>
+        <Link to="/TextSummarizer"> Text Sum </Link>
         <Link to="/Profile"> Profile </Link> 
       </nav> 
       <Routes>
@@ -59,7 +59,7 @@ function App() {
         <Route path="/EditJournal/:id" element={<EditJournal database = {database} />} />
         <Route path="/AddEvent" element={<AddEvent database = {database}/>} />
         <Route path="/EditEvent/:id" element={<EditEvent database = {database}/>} />
-        <Route path="/TextSum" element={<TextSum />} />
+        <Route path="/TextSummarizer" element={<TextSum />} />
 
         
         </Routes>
