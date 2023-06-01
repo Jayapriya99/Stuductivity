@@ -8,7 +8,7 @@ function TextSummarizer() {
   const [text, setText] = useState("");
 
   const handleSummarize = () => {
-    axios.post('http://localhost:5000/summarize', { text: text })
+    axios.post('http://localhost:8080/summarize', { text: text })
       .then(response => {
         const summary = response.data.summary;
         setSummary(summary);
