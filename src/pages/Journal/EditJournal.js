@@ -8,6 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Button } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { format } from 'date-fns';
+
 
 export default function EditJournal({
     database
@@ -23,6 +25,12 @@ export default function EditJournal({
         setJournalData(value);
     };
 
+    const getDateInWords = (dateString) => {
+        const date = new Date(dateString);
+        return format(date, 'd MMMM yyyy');
+      };
+      
+
     useEffect(() => {
         const updateJournal = setTimeout(() => {
             const journalToUpdate = doc(journalCollection, params.id);
@@ -31,12 +39,12 @@ export default function EditJournal({
                 body: journalData
             })
                 .then(() => {
-                    toast.success('Journal updated', {
+                    console.log('Journal updated', {
                         autoClose:1000
                     })
                 })
                 .catch(() => {
-                    toast.error('Cannot update Journal', {
+                    console.log('Cannot update Journal', {
                         autoClose:1000
                     })
                 })
@@ -74,7 +82,7 @@ export default function EditJournal({
         <div>
             <ToastContainer/>
             
-            <h3> {title} </h3>
+            <h3 className='title-header'> {title} </h3>
             <ReactQuill
                 className='react-quill'
                 value={journalData}

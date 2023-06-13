@@ -33,12 +33,12 @@ export default function EditNotes({
                 body: notesData
             })
                 .then(() => {
-                    toast.success('Notes updated', {
+                    console.log('Notes updated', {
                         autoClose:1000
                     })
                 })
                 .catch(() => {
-                    toast.error('Cannot update notes', {
+                    console.log('Cannot update notes', {
                         autoClose:1000
                     })
                 })
