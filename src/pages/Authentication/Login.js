@@ -1,142 +1,136 @@
-import React from 'react';
-import { auth, provider } from '../../firebase-config';
-import { signInWithPopup, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { createTheme } from '@mui/system';
-import { 
-  Card, 
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { createTheme } from "@mui/system";
+import {
+  Card,
   Grid,
-  Dialog,
   Typography,
-  Link,
-  ThemeProvider,
   TextField,
   CardContent,
-  Button, } from '@mui/material';
+  Button,
+  Box,
+} from "@mui/material";
+import { signInWithEmail, signInWithGoogle } from "../../utils/auth";
+import { createNewUser } from "../../utils/manage-users";
 
-
-function Login({ setIsAuth }) {
-
-  let navigate = useNavigate();
+function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  const [user, setUser] = useState({});
+  const [error, setError] = useState();
 
-
-  const signInWithGoogle = () => {
-    signInWithPopup(auth, provider).then((result) => {
-      localStorage.setItem("isAuth", true);
-      setIsAuth(true);
-      navigate("/Notes");
-    });
+  const onSuccessLogin = async (user) => {
+    await createNewUser(user);
   };
 
-  const loginWithEmail = async () => {
-    try{
-      const user = await signInWithEmailAndPassword(
-        auth, 
-        loginEmail, 
-        loginPassword
-        );
-        navigate("/Notes");
-        console.log(user);
-      } catch (error) {
-        alert('Incorrect email or password')
-        console.log(error.message);
-      }
+  const handleLoginWithEmail = () => {
+    signInWithEmail(loginEmail, loginPassword)
+      .then((response) => onSuccessLogin(response.user))
+      .catch((error) => setError("Invalid Email or Password"));
   };
+
+  const handleLoginWithGoogle = () => {
+    signInWithGoogle()
+      .then((response) => onSuccessLogin(response.user))
+      .catch((error) => setError("Invalid Email or Password"));
+  };
+
+  useEffect(() => {
+    setError("");
+  }, [loginEmail, loginPassword]);
 
   const theme = createTheme({
     palette: {
       secondary: {
-        main: '#C4A69B'
-      }
-    }
-  })
-
-  const GoToSignUp = async() => {
-    navigate("/SignUp");
-  }
-
-  if (!user) {
-    navigate("/Login");
-  }
- 
+        main: "#C4A69B",
+      },
+    },
+  });
 
   return (
-    
-    <div className='LoginPage'>
+    <div className="LoginPage auth-page">
       <Grid
-      container
-      direction="column"
-      alignItems="center"
-      justifyContent="center"
-      style={{ paddingTop:100}}
-      >
-        
-      {/* <ThemeProvider theme={theme}> */}
-      <Card
-        display="flex" 
-        sx={{ maxWidth: 500 }}
-        style={{ height: 500, width: 500}}
-        alignItems="center"
+        container
         direction="column"
-        justifyContent="center">
-          <CardContent
-          justifyContent="center"
-          alignItems="center"
+        alignItems="center"
+        justifyContent="center"
+        style={{ paddingTop: 100 }}
+      >
+        {/* <ThemeProvider theme={theme}> */}
+        <Card
+          display="flex"
           sx={{ maxWidth: 500 }}
-          style={{ height: 500, width: 500}}
-          >
-          <Typography className='title-login' style={{paddingLeft:170}} variant="h4">  LOGIN </Typography>
-          <Grid item xs={12} >
-            <TextField 
-            placeholder='Email Address' 
-            style={{width:400, padding:30}}
-            onChange={(event) => setLoginEmail(event.target.value)}
-             />
-          </Grid>
-
-          <Grid item xs={12}>
-            <TextField 
-            style={{width:400, paddingLeft:30, paddingRight:30, paddingTop:10, paddingBottom:10}} 
-            placeholder='Password' 
-            onChange={(event) => setLoginPassword(event.target.value)}
-            type="password"/>
-          </Grid>
-
-          <Grid>
-            <Button style={{marginLeft:170, marginBottom:20, marginTop:20}} variant="contained" className='login' onClick={loginWithEmail}> Sign in </Button>
-          </Grid>
-          
-          <Grid>
-            <Button style={{marginLeft:120, marginBottom:20}}  variant="contained" className='loginWithGoogle' onClick={signInWithGoogle} > Sign in with Google </Button>
-          </Grid>
-
-          <Grid>
-            <Typography 
-            style={{width:400, paddingLeft:130, paddingRight:30, paddingTop:10, paddingBottom:10}}
-            > Do not have an account?
-            <Link onClick={GoToSignUp}>
-            <Typography navigate={'/SignUp'}> Register here now! </Typography>
-            </Link>
+          style={{ minHeight: 500, width: 500 }}
+          direction="column"
+        >
+          <CardContent sx={{ maxWidth: 500 }}>
+            <Typography className="title-login" textAlign="center" variant="h4">
+              LOGIN
             </Typography>
-          </Grid>
-          </CardContent>
-      </Card>
-      {/* </ThemeProvider> */}
+            <Grid item xs={12}>
+              <TextField
+                placeholder="Email Address"
+                style={{ maxWidth: 400, width: "100%", padding: 30 }}
+                onChange={(event) => setLoginEmail(event.target.value)}
+              />
+            </Grid>
 
+            <Grid item xs={12}>
+              <TextField
+                style={{ maxWidth: 400, width: "100%", padding: "10px 30px" }}
+                placeholder="Password ( More than 6 chars )"
+                onChange={(event) => setLoginPassword(event.target.value)}
+                type="password"
+              />
+            </Grid>
+            <Typography paddingX="30px" marginTop="10px" color="red">
+              {error}
+            </Typography>
+            <Grid
+              textAlign="center"
+              display="flex"
+              direction="column"
+              alignItems="center"
+              gap="20px"
+              paddingY="20px"
+            >
+              <Button
+                style={{ width: "max-content" }}
+                variant="contained"
+                className="login"
+                onClick={handleLoginWithEmail}
+              >
+                Sign in
+              </Button>
+
+              <Button
+                style={{ width: "max-content" }}
+                variant="contained"
+                className="handleLoginWithGoogle"
+                onClick={handleLoginWithGoogle}
+              >
+                Sign in with Google
+              </Button>
+            </Grid>
+
+            <Grid>
+              <Box textAlign="center" style={{}}>
+                <p>Do not have an account?</p>
+                <Link to="/signup">Register here now! </Link>
+              </Box>
+            </Grid>
+          </CardContent>
+        </Card>
+        {/* </ThemeProvider> */}
       </Grid>
 
-      
-{/* 
+      {/* 
       <Input placeholder='Email Address' onChange={(event) => setLoginEmail(event.target.value)}/>
       <Input placeholder='Password' onChange={(event) => setLoginPassword(event.target.value)}/> */}
 
-      {/* <button onClick={loginWithEmail}> Login </button> */}
+      {/* <button onClick={handleLoginWithEmail}> Login </button> */}
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;

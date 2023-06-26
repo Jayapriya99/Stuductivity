@@ -1,83 +1,107 @@
-import * as React from 'react';
-import signUserOut from '../../App';
-import { useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
-import { auth } from '../../firebase-config';
+import * as React from "react";
 import { useEffect, useState } from "react";
-import { 
-  Box, 
-  TextField,
-  Button}from '@mui/material';
+import { Box, TextField, Button } from "@mui/material";
+import { signOut } from "../../utils/auth";
+import { getUserData, updateUser } from "../../utils/manage-users";
+import { auth } from "../../firebase-config";
 
-  const styleCenter = {
-    top: '50%',
-    right: '0%',
-    left: '0%',
-    transform: 'translate(20%, 50%)',
-    p: 1
-  }
-
+const styleCenter = {
+  display: "flex",
+  justifyContent: "space-evenly",
+  alignItems: "center",
+  p: 1,
+};
 
 export default function Profile() {
+  const [profileData, setProfileData] = useState({
+    name: "",
+    email: "",
+    institue: "",
+    userId: "",
+  });
 
-  const { user, isLoggedIn } = useAuth();
-  const [buttonClickedCount, setButtonClickedCount] = useState(0);
-  const navigate = useNavigate();
-
-  const signOut = () => {
-    auth.signOut();
-    navigate("/");
+  const handleSignOut = () => {
+    signOut();
   };
 
-  useEffect(() => {});
+  const handleUpdateProfile = () => {
+    updateUser(profileData)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    const currentUser = auth.currentUser;
+
+    getUserData(currentUser.uid).then((user) => {
+      setProfileData({
+        email: user?.email,
+        name: user?.name,
+        institue: user?.institue || "",
+        userId: currentUser.uid,
+      });
+    });
+  }, []);
   // let userEmail = localStorage.getItem('loginEmail');
 
   return (
     <div>
-    
-    <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-    <TextField
-            label='User Email'
-            className='add-input'
-            // onChange={(event) => setTitle(event.target.value)}
-            // value={title}
-            style={{ margin: 30, width: '800px' }}>
-            </TextField>
-            <TextField
-            placeholder='Name'
-            className='add-input'
-            // onChange={(event) => setDate(event.target.value)}
-            // value={date}
-            style={{marginBottom: 10, width: '800px' }}
-            >
-            </TextField>  
-            <TextField
-            placeholder='Add the Institute'
-            className='add-input'
-            // onChange={(event) => setTime(event.target.value)}
-            // value={time}
-            style={{marginTop: 20, width: '800px' }}
-            >
-            </TextField> 
-    </Box>
-    <Box sx={styleCenter}
-    >
-    <Button 
-    style={{width:250, height:50}}
-    // value={id ? "Update" : "Add Todo"}
-    // onClick={addTodo}
-    size='large'>
-        UPDATE PROFILE
-    </Button>
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <TextField
+          label="User Email"
+          className="add-input"
+          onChange={(event) =>
+            setProfileData((prev) => ({ ...prev, email: event.target.value }))
+          }
+          value={profileData.email}
+          style={{ margin: 30, width: "800px" }}
+        ></TextField>
+        <TextField
+          placeholder="Name"
+          className="add-input"
+          onChange={(event) =>
+            setProfileData((prev) => ({ ...prev, name: event.target.value }))
+          }
+          value={profileData.name}
+          style={{ marginBottom: 10, width: "800px" }}
+        ></TextField>
+        <TextField
+          placeholder="Add the Institute"
+          className="add-input"
+          onChange={(event) =>
+            setProfileData((prev) => ({
+              ...prev,
+              institue: event.target.value,
+            }))
+          }
+          value={profileData.institue}
+          style={{ marginTop: 20, width: "800px" }}
+        ></TextField>
+      </Box>
+      <Box sx={styleCenter}>
+        <Button
+          style={{ width: 250, height: 50 }}
+          // value={id ? "Update" : "Add Todo"}
+          onClick={handleUpdateProfile}
+          size="large"
+        >
+          UPDATE PROFILE
+        </Button>
 
-    <Button 
-    style={{width:250, height:50, marginLeft:350}}
-    // value={id ? "Update" : "Add Todo"}
-    onClick={signUserOut}
-    size='large'>
-        SIGN OUT
-    </Button>
-    </Box></div>
-  )
+        <Button
+          style={{ width: 250, height: 50 }}
+          // value={id ? "Update" : "Add Todo"}
+          onClick={handleSignOut}
+          size="large"
+        >
+          SIGN OUT
+        </Button>
+      </Box>
+    </div>
+  );
 }
-

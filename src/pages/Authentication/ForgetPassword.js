@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function ForgetPassword() {
-  return (
-    <div>ForgetPassword</div>
-  )
+  return <div className="auth-page">ForgetPassword</div>;
 }
 
-export default ForgetPassword
+export default ForgetPassword;
