@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { Box, TextField, Button } from "@mui/material";
+import { Box, TextField, Button, Card, CardContent, Typography } from "@mui/material";
 import { signOut } from "../../utils/auth";
 import { getUserData, updateUser } from "../../utils/manage-users";
 import { auth } from "../../firebase-config";
@@ -9,6 +9,12 @@ const styleCenter = {
   display: "flex",
   justifyContent: "space-evenly",
   alignItems: "center",
+  p: 1,
+};
+
+const styleSignOut = {
+  display: "flex-end",
+  alignItems: "right",
   p: 1,
 };
 
@@ -52,6 +58,25 @@ export default function Profile() {
         justifyContent="center"
         alignItems="center"
       >
+        <Card
+          display="flex"
+          // sx={{ maxWidth: 500 }}
+          style={{
+            minHeight: 300,
+            width: 850,
+            backgroundColor: '#f0c6b9',
+            border: '5px solid #f0c6b9', 
+            borderColor: '#f0c6b9', 
+            borderRadius: '20px',
+            marginTop: '40px',
+            boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+          }}
+          direction="column"
+        >
+          <CardContent sx={{ maxWidth: 800 }} alignItems="center">
+          <Typography className="title-profile" textAlign="center" variant="h4">
+              PROFILE
+            </Typography>
         <TextField
           label="User Email"
           className="add-input"
@@ -59,7 +84,7 @@ export default function Profile() {
             setProfileData((prev) => ({ ...prev, email: event.target.value }))
           }
           value={profileData.email}
-          style={{ margin: 30, width: "800px" }}
+          style={{ margin: 20, width: "750px" }}
         ></TextField>
         <TextField
           label="Name"
@@ -69,7 +94,7 @@ export default function Profile() {
             setProfileData((prev) => ({ ...prev, name: event.target.value }))
           }
           value={profileData.name}
-          style={{ marginBottom: 10, width: "800px" }}
+          style={{ margin: 20, width: "750px" }}
         ></TextField>
         <TextField
           label="Institute"
@@ -82,19 +107,26 @@ export default function Profile() {
             }))
           }
           value={profileData.institue}
-          style={{ marginTop: 20, width: "800px" }}
+          style={{ margin: 20, width: "750px" }}
         ></TextField>
-      </Box>
-      <Box sx={styleCenter}>
+        <Box sx={styleCenter}>
         <Button
           style={{ width: 250, height: 50 }}
+          sx={{
+            backgroundColor: '#4F709C',
+            color: 'white' 
+          }}
           // value={id ? "Update" : "Add Todo"}
           onClick={handleUpdateProfile}
           size="large"
         >
           UPDATE PROFILE
         </Button>
-
+      </Box>
+        </CardContent>
+        </Card>
+      </Box>
+      <Box sx={styleSignOut}>
         <Button
           style={{ width: 250, height: 50 }}
           // value={id ? "Update" : "Add Todo"}
@@ -104,6 +136,7 @@ export default function Profile() {
           SIGN OUT
         </Button>
       </Box>
+      
     </div>
   );
 }

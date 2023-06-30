@@ -61,7 +61,7 @@ function Login() {
           display="flex"
           sx={{ maxWidth: 500 }}
           style={{
-            minHeight: 500,
+            minHeight: 550,
             width: 500,
             backgroundColor: '#2E4C6D',
             border: '5px solid #2E4C6D', 
@@ -126,10 +126,10 @@ function Login() {
               direction="column"
               alignItems="center"
               gap="20px"
-              paddingY="20px"
+              paddingY="10px"
             >
               <Button
-                style={{ width: 400 }}
+                style={{ width: 400, marginTop: 20 }}
                 sx={{
                   backgroundColor: '#FC997C',
                   color: '#000000'
@@ -142,7 +142,7 @@ function Login() {
               </Button>
 
               <Button
-                style={{ width: 400 }}
+                style={{ width: 400}}
                 sx={{
                   backgroundColor: '#FC997C',
                   color: '#000000'
@@ -156,7 +156,7 @@ function Login() {
             </Grid>
 
             <Grid>
-              <Box textAlign="center" style={{ color: '#eeeeee'}}>
+              <Box textAlign="center" style={{ color: '#eeeeee', paddingTop: 20}}>
                 <Typography>Do not have an account?</Typography>
                 <Link style={{ color: '#FF6666', fontStyle: 'italic', textDecoration: 'underline' }} to="/signup">
                   Register here now!

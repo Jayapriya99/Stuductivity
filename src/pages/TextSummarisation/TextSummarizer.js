@@ -23,14 +23,14 @@ function TextSummarizer() {
       <Typography
         style={{ paddingTop: 20 }}
         className='text-sum'
-        variant='h5'
+        variant='h4'
         align='center'>
         Text Summarisation
       </Typography>
       <Typography
         className='text-sum-words'
         align='center'
-        style={{ paddingTop: 20 }}
+        style={{ paddingTop: 10 }}
       >
         Enter the text below to summarise large text into key points
       </Typography>
@@ -38,7 +38,7 @@ function TextSummarizer() {
       <Box 
       align='center' 
       className='text-box'
-      style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}
+      style={{ backgroundColor: "#f0c6b9" }}
       >
         <TextField
           className='text-field'
@@ -56,6 +56,7 @@ function TextSummarizer() {
         <Button
           type='button'
           variant='contained'
+          style={{ width: 200, height: 50, backgroundColor: '#396EB0', color: 'white', fontSize: '1.0em' }}
           onClick={handleSummarize}
         >
           Summarize
@@ -65,7 +66,7 @@ function TextSummarizer() {
       <Box 
       align='center' 
       className='text-box'
-      style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}
+      style={{ backgroundColor: "#f0c6b9"  }}
       >
         <TextField
           className='text-field'

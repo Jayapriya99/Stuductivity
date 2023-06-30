@@ -138,6 +138,18 @@ a {
   padding-right: 50px;
 }
 
+.title-profile {
+  color: #2E4C6D;
+  text-decoration: none;
+  margin: 10px;
+  font-size: 3rem; /* Updated font size */
+  /* font-weight: bold; */
+  font-family: Helvetica;
+  padding-top: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
 .grid-3 {
   margin-top: 30px;
   margin-left: 200px;
@@ -149,30 +161,28 @@ a {
   gap: 10px;
 }
 
-/* .backButton{
-  margin-top: 20px;
-  margin-bottom: 20px;
-} */
-
 .text-sum {
-  font-size: 2.5em;
+  font-size: 2.2em;
   font-family: Arial, Helvetica, sans-serif;
   margin-top: 30px;
   font-weight: bold;
+  color: #2E4C6D;
 }
 
 .text-sum-words {
   margin-bottom: 20px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.2em;
+  color: #2E4C6D;
 }
 
 .text-box {
   margin: 20px auto;
-  width: 500px;
+  width: 800px;
   border: 1px solid #ccc;
   padding: 8px;
   border-radius: 4px;
+  background-color: #f0c6b9;
 }
 
 .text-field {
