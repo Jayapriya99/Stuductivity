@@ -62,6 +62,7 @@ export default function Profile() {
           style={{ margin: 30, width: "800px" }}
         ></TextField>
         <TextField
+          label="Name"
           placeholder="Name"
           className="add-input"
           onChange={(event) =>
@@ -71,6 +72,7 @@ export default function Profile() {
           style={{ marginBottom: 10, width: "800px" }}
         ></TextField>
         <TextField
+          label="Institute"
           placeholder="Add the Institute"
           className="add-input"
           onChange={(event) =>

@@ -35,7 +35,11 @@ function TextSummarizer() {
         Enter the text below to summarise large text into key points
       </Typography>
 
-      <Box align='center' className='text-box'>
+      <Box 
+      align='center' 
+      className='text-box'
+      style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}
+      >
         <TextField
           className='text-field'
           placeholder='Enter your text to summarise here'
@@ -46,7 +50,9 @@ function TextSummarizer() {
           onChange={(e) => setText(e.target.value)}
         />
       </Box>
-      <Box align='center'>
+      <Box 
+      align='center'
+      >
         <Button
           type='button'
           variant='contained'
@@ -56,7 +62,11 @@ function TextSummarizer() {
         </Button>
       </Box>
 
-      <Box align='center' className='text-box'>
+      <Box 
+      align='center' 
+      className='text-box'
+      style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}
+      >
         <TextField
           className='text-field'
           placeholder='Summarized text'

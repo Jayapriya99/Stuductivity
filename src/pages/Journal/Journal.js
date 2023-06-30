@@ -98,6 +98,10 @@ useEffect(() => {
       >
       <Button 
       style={{width:200, height:50}}
+      sx={{
+        backgroundColor: '#27374D',
+        color: 'white' // Added font color
+      }}
       variant="contained" 
       endIcon={<AddCircleOutlineIcon />}
       onClick={handleOpen}

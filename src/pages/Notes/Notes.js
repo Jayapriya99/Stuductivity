@@ -22,8 +22,8 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   height: 150,
-  bgcolor: 'background.paper',
-  border: '1px solid #000',
+  bgcolor: '#FC997C',
+  border: 'solid #FC997C',
   boxShadow: 24,
   p: 4,
 };
@@ -99,13 +99,17 @@ export default function Notes(
     <div>
       <Box sx={styleCenter}
       >
-      <Button 
-      style={{width:200, height:50}}
-      variant="contained" 
-      endIcon={<AddCircleOutlineIcon />}
-      onClick={handleOpen}
-      size='large'>
-          Add Notes
+      <Button
+        style={{ width: 200, height: 50 }}
+        sx={{
+          backgroundColor: '#4F709C',
+          color: 'white'
+        }}
+        endIcon={<AddCircleOutlineIcon />}
+        onClick={handleOpen}
+        size='large'
+      >
+        Add Notes
       </Button>
       </Box>
       {/* <form>
@@ -131,7 +135,7 @@ export default function Notes(
           <Typography 
           className='title-add'
           id="modal-modal-title" 
-          variant="h6" 
+          variant="h5" 
           component="h2"
           >
             Add a new subject
@@ -146,6 +150,10 @@ export default function Notes(
               </TextField>
               <Button 
               className='btn-add'
+              sx={{
+                backgroundColor: '#4F709C',
+                color: 'white'
+              }}
               onClick={addNotes}
               variant='contained'
               > ADD </Button>

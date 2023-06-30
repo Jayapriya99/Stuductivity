@@ -106,6 +106,10 @@ export default function ToDo(
       >
       <Button 
       style={{width:200, height:50}}
+      sx={{
+        backgroundColor: '#27374D',
+        color: 'white' // Added font color
+      }}
       variant="contained" 
       endIcon={<AddCircleOutlineIcon />}
       onClick={() => navigate('/AddTodo')}
@@ -120,7 +124,7 @@ export default function ToDo(
       <div className='grid-3'>
         {todoData.map((doc) => {
           return (
-            <Box className='grid-2' 
+            <Box className='grid-2-todo' 
             sx={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr 1fr auto auto',
@@ -135,20 +139,20 @@ export default function ToDo(
               },
             }}
             >
-              <Typography sx={{ display: 'flex', alignItems: 'center', whiteSpace: 'nowrap' }}>
+              <Typography sx={{ display: 'flex', alignItems: 'center', whiteSpace: 'nowrap', fontWeight: 'bold' }}>
                 {doc.title}
               </Typography>
-              <Typography sx={{ display: 'flex', alignItems: 'center', whiteSpace: 'nowrap' }}>
+              <Typography sx={{ display: 'flex', alignItems: 'center', whiteSpace: 'nowrap',  fontWeight: 'bold'  }}>
                 {getDateInWords(doc.date)}
               </Typography>
-              <Typography sx={{paddingLeft:5, paddingTop:2, paddingBottom:2, paddingRight: 20 }}>
+              <Typography sx={{paddingLeft:5, paddingTop:2, paddingBottom:2, paddingRight: 20,  fontWeight: 'bold'  }}>
                 {doc.time}
               </Typography>
               <ModeEditIcon
               variant='filled'
               color="primary"
               // startIcon={<ModeEditIcon />}
-              style={{cmarginRight: 20}}
+              style={{cmarginRight: 20, paddingRight: 30}}
               onClick={() => navigate(`/EditTodo/${doc.id}`)}
               >
               </ModeEditIcon>
@@ -156,7 +160,7 @@ export default function ToDo(
               variant='filled'
               color="warning"
               onClick={() => TodoDelete(doc.id)}
-              style={{marginLeft: 20}}
+              style={{marginLeft: 20, paddingRight: 10}}
               >
               DELETE
               </DeleteIcon>

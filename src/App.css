@@ -13,7 +13,7 @@ nav {
   margin: 0;
   width: 100%;
   height: 80px;
-  background-color: #334257;
+  background-color: #2E4C6D;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +26,7 @@ a {
   text-decoration: none;
   margin: 10px;
   font-size: 25px;
-  font-family: "Playfair Display";
+  font-family: Helvetica;
   padding-left: 50px;
   padding-right: 50px;
 }
@@ -52,7 +52,7 @@ a {
   background-color: #ffc107;
   border: none;
   cursor: pointer;
-  font-family: Playfair Display;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .react-quill {
@@ -90,15 +90,16 @@ a {
 }
 
 .grid-2 {
-  border: 2px solid #dae8f5;
+  border: 2px solid #FC997C;
   text-align: center;
-  background-color: #ffffff;
-  font-family: Playfair Display;
+  background-color: #FC997C;
+  color: #1B435D;
+  font-family: Arial, Helvetica, sans-serif;
   display: inline-block;
 }
 
 .grid-2:hover {
-  background-color: #dae8f5;
+  background-color: #f0c6b9;
   cursor: pointer;
 }
 
@@ -121,14 +122,17 @@ a {
 .title-add {
   padding-left: 110px;
   padding-bottom: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #213555;
 }
 
 .title-login {
-  color: #334257;
+  color: #eeeeee;
   text-decoration: none;
   margin: 10px;
-  font-size: xx-large;
-  font-family: Playfair Display;
+  font-size: 3rem; /* Updated font size */
+  /* font-weight: bold; */
+  font-family: Helvetica;
   padding-top: 20px;
   padding-left: 50px;
   padding-right: 50px;
@@ -152,14 +156,14 @@ a {
 
 .text-sum {
   font-size: 2.5em;
-  font-family: Playfair Display;
+  font-family: Arial, Helvetica, sans-serif;
   margin-top: 30px;
   font-weight: bold;
 }
 
 .text-sum-words {
   margin-bottom: 20px;
-  font-family: Playfair Display;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 1.2em;
 }
 
@@ -176,4 +180,18 @@ a {
   height: 100%;
   border: none;
   resize: none;
+}
+
+.grid-2-todo {
+  border: 1px solid #FC997C;
+  text-align: center;
+  background-color: #f0c6b9;
+  color: #1B435D;
+  font-family: Arial, Helvetica, sans-serif;
+  display: inline-block;
+}
+
+.grid-2-todo:hover {
+  background-color: #FC997C;
+  cursor: pointer;
 }

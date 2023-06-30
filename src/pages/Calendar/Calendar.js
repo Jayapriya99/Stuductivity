@@ -109,12 +109,12 @@ export default function CalendarPage({ database }) {
           gap: "1rem",
         }}
       >
-        Selected date: {date.toDateString()}
+        {/* Selected date: {date.toDateString()} */}
         <Box sx={styleCenter}>
           <Button
-            style={{ width: 200, height: 50 }}
+            style={{ width: 350, height: 50, backgroundColor: '#396EB0', color: 'white' }}
             variant="contained"
-            endIcon={<AddCircleOutlineIcon />}
+            startIcon={<AddCircleOutlineIcon />}
             onClick={() =>
               navigate("/AddEvent", {
                 state: { date: moment(date).format("YYYY-MM-DD") },
@@ -122,7 +122,7 @@ export default function CalendarPage({ database }) {
             }
             size="large"
           >
-            Add Event
+            Add Event for {date.toDateString()}
           </Button>
         </Box>
       </Box>

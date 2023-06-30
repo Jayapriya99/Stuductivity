@@ -1,13 +1,14 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
+import { Box } from "@mui/material";
+import NotesIcon from '@mui/icons-material/Notes';
+
 
 function Layout() {
   return (
     <main>
       <header>
         <nav>
-          {/* {!isAuth ? <Link to="/Login" > Login </Link> : <button onClick={signUserOut}> Sign Out </button>} */}
-          {/* {!isAuth ? <Link to="/SignUp" > SignUp </Link> : <button onClick={signUserOut}> Sign Out </button>} */}
           <Link to="/Notes"> Notes </Link>
           <Link to="/Calendar"> Calendar </Link>
           <Link to="/ToDo"> To-do </Link>

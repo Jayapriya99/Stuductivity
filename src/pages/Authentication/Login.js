@@ -60,29 +60,63 @@ function Login() {
         <Card
           display="flex"
           sx={{ maxWidth: 500 }}
-          style={{ minHeight: 500, width: 500 }}
+          style={{
+            minHeight: 500,
+            width: 500,
+            backgroundColor: '#2E4C6D',
+            border: '5px solid #2E4C6D', 
+            borderColor: '#2E4C6D', 
+            borderRadius: '20px',
+            boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+          }}
           direction="column"
         >
-          <CardContent sx={{ maxWidth: 500 }}>
-            <Typography className="title-login" textAlign="center" variant="h4">
+          <CardContent sx={{ maxWidth: 500 }} alignItems="center">
+            <Typography className="title-login" textAlign="center" variant="h3">
               LOGIN
             </Typography>
             <Grid item xs={12}>
               <TextField
                 placeholder="Email Address"
-                style={{ maxWidth: 400, width: "100%", padding: 30 }}
+                style={{
+                  maxWidth: 400,
+                  width: "100%",
+                  backgroundColor: '#eeeeee',
+                  margin: 30
+                }}
                 onChange={(event) => setLoginEmail(event.target.value)}
               />
             </Grid>
 
             <Grid item xs={12}>
               <TextField
-                style={{ maxWidth: 400, width: "100%", padding: "10px 30px" }}
+                style={{
+                  maxWidth: 400,
+                  width: "100%",
+                  backgroundColor: '#eeeeee',
+                  marginLeft: 30, 
+                  marginRight: 30,
+                  marginBottom: 10,
+                  marginTop: 10
+                }}
                 placeholder="Password ( More than 6 chars )"
+                variant="filled"
                 onChange={(event) => setLoginPassword(event.target.value)}
                 type="password"
               />
             </Grid>
+
+            <Grid textAlign="right" >
+              <Link style={{ 
+                  color: '#FF6666', 
+                  fontStyle: 'italic', 
+                  textDecoration: 'underline',
+                  }} 
+                  to="/ForgetPassword">
+                      Forgot your password?
+                </Link>
+            </Grid>
+            
             <Typography paddingX="30px" marginTop="10px" color="red">
               {error}
             </Typography>
@@ -95,7 +129,11 @@ function Login() {
               paddingY="20px"
             >
               <Button
-                style={{ width: "max-content" }}
+                style={{ width: 400 }}
+                sx={{
+                  backgroundColor: '#FC997C',
+                  color: '#000000'
+                }}
                 variant="contained"
                 className="login"
                 onClick={handleLoginWithEmail}
@@ -104,7 +142,11 @@ function Login() {
               </Button>
 
               <Button
-                style={{ width: "max-content" }}
+                style={{ width: 400 }}
+                sx={{
+                  backgroundColor: '#FC997C',
+                  color: '#000000'
+                }}
                 variant="contained"
                 className="handleLoginWithGoogle"
                 onClick={handleLoginWithGoogle}
@@ -114,9 +156,11 @@ function Login() {
             </Grid>
 
             <Grid>
-              <Box textAlign="center" style={{}}>
-                <p>Do not have an account?</p>
-                <Link to="/signup">Register here now! </Link>
+              <Box textAlign="center" style={{ color: '#eeeeee'}}>
+                <Typography>Do not have an account?</Typography>
+                <Link style={{ color: '#FF6666', fontStyle: 'italic', textDecoration: 'underline' }} to="/signup">
+                  Register here now!
+                </Link>
               </Box>
             </Grid>
           </CardContent>
