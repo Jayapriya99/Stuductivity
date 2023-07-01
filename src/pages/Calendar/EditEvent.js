@@ -15,7 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import {
   Card,
   Box,
-  Typography,
+  CardContent,
   Modal,
   TextField,
   Table,
@@ -28,11 +28,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import { calendarCollection } from "./Calendar";
 
 const styleCenter = {
-  top: "50%",
-  right: "50%",
-  left: "50%",
-  transform: "translate(42%, 50%)",
-  p: 1,
+  display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    p: 1,
+    marginTop: 5
 };
 
 export default function EditEvent({ database }) {
@@ -65,13 +65,13 @@ export default function EditEvent({ database }) {
       time: time,
     })
       .then(() => {
-        toast.success("Event updated", {
+        console.log("Event updated", {
           autoClose: 1000,
         });
         navigate("/Calendar");
       })
       .catch(() => {
-        toast.error("Cannot update Event", {
+        console.log("Cannot update Event", {
           autoClose: 1000,
         });
       });
@@ -89,6 +89,28 @@ export default function EditEvent({ database }) {
 
   return (
     <div>
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Card
+          display="flex"
+          // sx={{ maxWidth: 500 }}
+          style={{
+            minHeight: 420,
+            width: 850,
+            backgroundColor: '#f0c6b9',
+            border: '5px solid #f0c6b9', 
+            borderColor: '#f0c6b9', 
+            borderRadius: '20px',
+            marginTop: '40px',
+            boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+          }}
+          direction="column"
+        >
+          <CardContent sx={{ maxWidth: 800 }} alignItems="center"></CardContent>
       <Box
         display="flex"
         flexDirection="column"
@@ -122,14 +144,21 @@ export default function EditEvent({ database }) {
       <Box sx={styleCenter}>
         <Button
           style={{ width: 200, height: 50 }}
+          sx={{
+            backgroundColor: '#4F709C',
+            color: 'white' 
+          }}
           variant="contained"
           endIcon={<AddCircleOutlineIcon />}
           onClick={EditEvent}
           size="large"
         >
-          EDIT TODO
+          EDIT EVENT
         </Button>
       </Box>
+
+      </Card>
+    </Box>
     </div>
   );
 }

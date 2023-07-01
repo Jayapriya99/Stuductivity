@@ -4,6 +4,7 @@ import { Box, TextField, Button, Card, CardContent, Typography } from "@mui/mate
 import { signOut } from "../../utils/auth";
 import { getUserData, updateUser } from "../../utils/manage-users";
 import { auth } from "../../firebase-config";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const styleCenter = {
   display: "flex",
@@ -13,9 +14,13 @@ const styleCenter = {
 };
 
 const styleSignOut = {
-  display: "flex-end",
-  alignItems: "right",
-  p: 1,
+  position: "fixed",
+  bottom: 0,
+  left: 10,
+  width: "100%",
+  display: "flex",
+  justifyContent: "flex-end",
+  paddingBottom: 8,
 };
 
 export default function Profile() {
@@ -128,8 +133,13 @@ export default function Profile() {
       </Box>
       <Box sx={styleSignOut}>
         <Button
-          style={{ width: 250, height: 50 }}
+          style={{ width: 180, height: 50, marginRight: 40 }}
           // value={id ? "Update" : "Add Todo"}
+          endIcon={<LogoutIcon />}
+          sx={{
+            backgroundColor: '#4F709C',
+            color: 'white' 
+          }}
           onClick={handleSignOut}
           size="large"
         >
