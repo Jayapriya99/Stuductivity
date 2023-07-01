@@ -99,7 +99,12 @@ export default function CalendarPage({ database }) {
         padding: "1rem",
       }}
     >
-      <Calendar onChange={setDate} value={date} tileClassName={tileClassName} />
+      <Calendar
+        onChange={setDate}
+        value={date}
+        tileClassName={tileClassName}
+        style={{ backgroundColor: '#396EB0' }}
+      />
 
       <Box
         style={{
