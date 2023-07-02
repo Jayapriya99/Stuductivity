@@ -78,6 +78,7 @@ function SignUp() {
             </Typography>
             <Grid item xs={12}>
               <TextField
+                label="Name"
                 placeholder="Name"
                 style={{
                   maxWidth: 400,
@@ -90,6 +91,7 @@ function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                label="User Email"
                 placeholder="Email Address"
                 style={{
                   maxWidth: 400,
@@ -112,6 +114,7 @@ function SignUp() {
                   backgroundColor: '#eeeeee',
                   margin: 30
                 }}
+                label="Password"
                 placeholder="Password ( More than 6 chars )"
                 type="password"
                 onChange={(event) => setSignUpPassword(event.target.value)}

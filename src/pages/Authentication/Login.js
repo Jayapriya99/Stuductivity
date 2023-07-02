@@ -77,6 +77,7 @@ function Login() {
             </Typography>
             <Grid item xs={12}>
               <TextField
+                label="User Email"
                 placeholder="Email Address"
                 style={{
                   maxWidth: 400,
@@ -90,6 +91,7 @@ function Login() {
 
             <Grid item xs={12}>
               <TextField
+              label="Password"
                 style={{
                   maxWidth: 400,
                   width: "100%",

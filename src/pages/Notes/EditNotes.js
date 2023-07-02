@@ -124,23 +124,6 @@ export default function EditNotes({
                 size='large'>
                 Back
             </Button>
-
-            <Button 
-                className='backButton'
-                style={{
-                    width:150, 
-                    height:50,
-                    bottom: 10,
-                    left: "9%",
-                    marginLeft: 20,
-                    position: "relative"
-                }}
-                // variant="contained" 
-                startIcon={<DownloadIcon />}
-                // onClick={() => navigate('/Notes')}
-                size='large'>
-                PDF
-            </Button>
         </div>
     )
 }
