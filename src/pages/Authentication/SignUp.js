@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   Card,
   Grid,
-  Input,
+  Box,
   Typography,
   ThemeProvider,
   TextField,
@@ -50,7 +50,15 @@ function SignUp() {
         <Card
           display="flex"
           sx={{ maxWidth: 500 }}
-          style={{ height: 600, width: 500 }}
+          style={{
+            minHeight: 600,
+            width: 500,
+            backgroundColor: '#2E4C6D',
+            border: '5px solid #2E4C6D', 
+            borderColor: '#2E4C6D', 
+            borderRadius: '20px',
+            boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+          }}
           alignItems="center"
           direction="column"
           justifyContent="center"
@@ -63,22 +71,35 @@ function SignUp() {
           >
             <Typography
               className="title-login"
-              style={{ paddingLeft: 170 }}
-              variant="h4"
+              textAlign="center"
+              variant="h3"
             >
               SIGN UP{" "}
             </Typography>
             <Grid item xs={12}>
               <TextField
                 placeholder="Name"
-                style={{ width: 400, padding: 30 }}
+                style={{
+                  maxWidth: 400,
+                  width: "100%",
+                  backgroundColor: '#eeeeee',
+                  margin: 30
+                }}
                 onChange={(event) => setSignUpName(event.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 placeholder="Email Address"
-                style={{ width: 400, padding: 30 }}
+                style={{
+                  maxWidth: 400,
+                  width: "100%",
+                  backgroundColor: '#eeeeee',
+                  marginLeft: 30, 
+                  marginRight: 30,
+                  marginBottom: 10,
+                  marginTop: 10
+                }}
                 onChange={(event) => setSignUpEmail(event.target.value)}
               />
             </Grid>
@@ -86,11 +107,10 @@ function SignUp() {
             <Grid item xs={12}>
               <TextField
                 style={{
-                  width: 400,
-                  paddingLeft: 30,
-                  paddingRight: 30,
-                  paddingTop: 10,
-                  paddingBottom: 10,
+                  maxWidth: 400,
+                  width: "100%",
+                  backgroundColor: '#eeeeee',
+                  margin: 30
                 }}
                 placeholder="Password ( More than 6 chars )"
                 type="password"
@@ -100,9 +120,19 @@ function SignUp() {
             <Typography paddingX="30px" marginTop="10px" color="red">
               {error}
             </Typography>
-            <Grid>
+            <Grid
+              textAlign="center"
+              display="flex"
+              direction="column"
+              alignItems="center"
+              paddingRight={5}
+              >
               <Button
-                style={{ marginLeft: 170, marginBottom: 20, marginTop: 20 }}
+                style={{ width: 400, marginTop: 20 }}
+                sx={{
+                  backgroundColor: '#FC997C',
+                  color: '#000000'
+                }}
                 variant="contained"
                 className="login"
                 onClick={handleSignUpWithEmail}
@@ -112,30 +142,20 @@ function SignUp() {
             </Grid>
 
             <Grid>
-              <Typography
-                style={{
-                  width: 400,
-                  paddingLeft: 130,
-                  paddingRight: 30,
-                  paddingTop: 10,
-                  paddingBottom: 10,
-                }}
-              >
+            <Box textAlign="center" style={{ color: '#eeeeee', paddingTop: 60 }}>
+              <Typography style={{ color: '#eeeeee' }} textAlign="center">
                 Already have an account?
                 <Link to="/login">
                   <Typography
-                    style={{
-                      width: 400,
-                      paddingLeft: 50,
-                      paddingRight: 30,
-                      paddingTop: 10,
-                      paddingBottom: 10,
-                    }}
+                    textAlign="center"
+                    style={{ color: '#FF6666', fontStyle: 'italic', textDecoration: 'underline', width: 100, paddingLeft: 180 }}
                   >
                     Login here
                   </Typography>
                 </Link>
               </Typography>
+            </Box>
+
             </Grid>
           </CardContent>
         </Card>

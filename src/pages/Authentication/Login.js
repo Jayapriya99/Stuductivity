@@ -106,7 +106,7 @@ function Login() {
               />
             </Grid>
 
-            <Grid textAlign="right" >
+            {/* <Grid textAlign="right" >
               <Link style={{ 
                   color: '#FF6666', 
                   fontStyle: 'italic', 
@@ -116,7 +116,7 @@ function Login() {
                       Forgot your password?
                 </Link>
             </Grid>
-            
+             */}
             <Typography paddingX="30px" marginTop="10px" color="red">
               {error}
             </Typography>
@@ -156,7 +156,7 @@ function Login() {
             </Grid>
 
             <Grid>
-              <Box textAlign="center" style={{ color: '#eeeeee', paddingTop: 20}}>
+              <Box textAlign="center" style={{ color: '#eeeeee', paddingTop: 50}}>
                 <Typography>Do not have an account?</Typography>
                 <Link style={{ color: '#FF6666', fontStyle: 'italic', textDecoration: 'underline' }} to="/signup">
                   Register here now!

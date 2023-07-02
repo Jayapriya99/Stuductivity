@@ -15,27 +15,27 @@ function Layout() {
         <nav>
         <Link to="/Notes">
             Notes
-            <EditNoteIcon style={{ marginLeft: 10, fontSize: 30}} />
+            <EditNoteIcon style={{ marginLeft: 10, fontSize: 30, verticalAlign: "middle"}} />
           </Link>
           <Link to="/Calendar"> 
             Calendar 
-            <CalendarMonthIcon style={{ marginLeft: 10, fontSize: 30}} />
+            <CalendarMonthIcon style={{ marginLeft: 10, fontSize: 30, verticalAlign: "middle"}} />
           </Link>
           <Link to="/ToDo"> 
             To-do 
-            <ChecklistIcon style={{ marginLeft: 10, fontSize: 30}} />
+            <ChecklistIcon style={{ marginLeft: 10, fontSize: 30, verticalAlign: "middle"}} />
           </Link>
           <Link to="/Journal"> 
             Journal 
-            <MenuBookIcon style={{ marginLeft: 10, fontSize: 30}} />
+            <MenuBookIcon style={{ marginLeft: 10, fontSize: 30, verticalAlign: "middle"}} />
           </Link>
           <Link to="/TextSummarizer"> 
             Text Sum 
-            <FormatColorTextIcon style={{ marginLeft: 10, fontSize: 30}} />
+            <FormatColorTextIcon style={{ marginLeft: 10, fontSize: 30, verticalAlign: "middle"}} />
             </Link>
           <Link to="/Profile"> 
             Profile 
-            <AccountCircleIcon style={{ marginLeft: 10, fontSize: 30}}/>
+            <AccountCircleIcon style={{ marginLeft: 10, fontSize: 30, verticalAlign: "middle"}}/>
             </Link>
         </nav>
       </header>

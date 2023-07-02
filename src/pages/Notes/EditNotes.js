@@ -86,13 +86,17 @@ export default function EditNotes({
             <Button 
                 className='deleteButton'
                 style={{
-                    width:100, 
+                    width:120, 
                     height:50,
                     bottom: 10,
                     left: "98%",
-                    marginLeft: -100,
+                    marginLeft: -120,
                     position: "relative"
                 }}
+                sx={{
+                    backgroundColor: '#FC997C',
+                    color: '#000000'
+                  }}
                 // variant="contained" 
                 endIcon={<DeleteIcon />}
                 onClick={noteDelete}
@@ -110,6 +114,10 @@ export default function EditNotes({
                     marginLeft: -100,
                     position: "relative"
                 }}
+                sx={{
+                    backgroundColor: '#396EB0',
+                    color: '#FFFFFF'
+                  }}
                 // variant="contained" 
                 startIcon={<ArrowBackIcon />}
                 onClick={() => navigate('/Notes')}

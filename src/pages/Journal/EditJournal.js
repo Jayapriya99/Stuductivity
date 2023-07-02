@@ -99,6 +99,10 @@ export default function EditJournal({
                 marginLeft: -100,
                 position: "relative"
             }}
+            sx={{
+                backgroundColor: '#396EB0',
+                color: '#FFFFFF'
+              }}
             // variant="contained" 
             startIcon={<ArrowBackIcon />}
             >
@@ -107,13 +111,17 @@ export default function EditJournal({
             <Button 
             onClick={journalDelete}
             style={{
-                width:100, 
+                width:120, 
                 height:50,
                 bottom: 10,
                 left: "98%",
-                marginLeft: -100,
+                marginLeft: -120,
                 position: "relative"
             }}
+            sx={{
+                backgroundColor: '#FC997C',
+                color: '#000000'
+              }}
             // variant="contained" 
             endIcon={<DeleteIcon />}
             > Delete </Button>

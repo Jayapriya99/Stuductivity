@@ -24,8 +24,8 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   height: 130,
-  bgcolor: 'background.paper',
-  border: '1px solid #000',
+  bgcolor: '#FC997C',
+  border: 'solid #FC997C',
   boxShadow: 24,
   p: 4,
 };
@@ -117,7 +117,12 @@ useEffect(() => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2" size='large'>
+          <Typography 
+          className='title-add'
+          id="modal-modal-title" 
+          variant="h5" 
+          component="h2" 
+          size='large'>
             Add a new Journal
           </Typography>
           <Box>
@@ -132,6 +137,10 @@ useEffect(() => {
               </TextField>              
               <Button 
               className='btn-add'
+              sx={{
+                backgroundColor: '#4F709C',
+                color: 'white'
+              }}
               variant='contained'
               onClick={addJournal}
               > ADD </Button>
