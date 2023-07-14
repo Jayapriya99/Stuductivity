@@ -13,6 +13,10 @@ function Layout() {
     <main>
       <header>
         <nav>
+        <Link to="/TextSummarizer"> 
+            Text Sum 
+            <FormatColorTextIcon style={{ marginLeft: 10, fontSize: 30, verticalAlign: "middle"}} />
+            </Link>
         <Link to="/Notes">
             Notes
             <EditNoteIcon style={{ marginLeft: 10, fontSize: 30, verticalAlign: "middle"}} />
@@ -29,10 +33,6 @@ function Layout() {
             Journal 
             <MenuBookIcon style={{ marginLeft: 10, fontSize: 30, verticalAlign: "middle"}} />
           </Link>
-          <Link to="/TextSummarizer"> 
-            Text Sum 
-            <FormatColorTextIcon style={{ marginLeft: 10, fontSize: 30, verticalAlign: "middle"}} />
-            </Link>
           <Link to="/Profile"> 
             Profile 
             <AccountCircleIcon style={{ marginLeft: 10, fontSize: 30, verticalAlign: "middle"}}/>

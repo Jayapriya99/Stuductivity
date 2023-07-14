@@ -7,15 +7,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import { format } from 'date-fns';
 
 import { 
-  Card, 
-  IconButton,
+  Card,
   Box,
   Typography,
   Modal, 
   TextField,
   Button}from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { DatePicker } from '@mui/x-date-pickers';
 
 const style = {
   position: 'absolute',
@@ -53,8 +51,18 @@ export default function Journal({
   const [journalData, setJournalData] = useState([]);
 
   const getDateInWords = (dateString) => {
+    const months = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    
     const date = new Date(dateString);
-    return format(date, 'd MMMM yyyy');
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    
+    const formattedDate = `${day} ${months[month]} ${year}`;
+    return formattedDate;
   };
   
 
@@ -166,4 +174,3 @@ useEffect(() => {
     </div>
   )
 }
-

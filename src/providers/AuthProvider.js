@@ -24,7 +24,7 @@ function AuthProvider({ children }) {
     if (!isLoggedIn) {
       navigate("/login");
     } else {
-      navigate("/notes");
+      navigate("/TextSummarizer");
     }
   }, [isLoggedIn]);
 

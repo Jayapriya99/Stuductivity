@@ -28,7 +28,6 @@ function AppRoutes() {
       {!isLoggedIn ? (
         <>
           <Route path="/login" element={<Login />} />
-          <Route path="/ForgetPassword" element={<ForgetPassword />} />
           <Route path="/SignUp" element={<SignUp />} />
         </>
       ) : (
