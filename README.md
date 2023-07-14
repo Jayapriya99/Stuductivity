@@ -14,6 +14,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+### Running python file
+
+Option 1: `docker run -p 8080:5000 pip_serve`  
+
+Option 2: `python server.py`
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
