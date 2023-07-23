@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, Paper, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import FormatColorTextIcon from '@mui/icons-material/FormatColorText';
@@ -26,6 +26,7 @@ function Home() {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    transition: 'background-color 0.3s', 
   };
 
   const iconStyle = {
@@ -37,69 +38,76 @@ function Home() {
     fontWeight: 'bold',
   };
 
+  const boxStyleHover = {
+    backgroundColor: '#FC997C', 
+  };
+
+  const [hoveredBox, setHoveredBox] = useState(null);
+
+  const handleBoxHover = (index) => {
+    setHoveredBox(index);
+  };
+
+  const handleBoxLeave = () => {
+    setHoveredBox(null);
+  };
+
+  const boxData = [
+    {
+      icon: <FormatColorTextIcon style={iconStyle} />,
+      title: 'Text Summarisation',
+      link: '/TextSummarizer',
+    },
+    {
+      icon: <EditNoteIcon style={iconStyle} />,
+      title: 'Notes',
+      link: '/Notes',
+    },
+    {
+      icon: <CalendarMonthIcon style={iconStyle} />,
+      title: 'Calendar',
+      link: '/Calendar',
+    },
+    {
+      icon: <ChecklistIcon style={iconStyle} />,
+      title: 'To-Do',
+      link: '/ToDo',
+    },
+    {
+      icon: <MenuBookIcon style={iconStyle} />,
+      title: 'Journal',
+      link: '/Journal',
+    },
+    {
+      icon: <AccountCircleIcon style={iconStyle} />,
+      title: 'Profile',
+      link: '/Profile',
+    },
+  ];
+
   return (
     <div style={containerStyle}>
-      <Grid container spacing={15}>
-        <Grid item xs={6} sm={4}>
-          <Link to="/TextSummarizer" style={{ textDecoration: 'none' }}>
-            <Paper style={boxStyle}>
-              <FormatColorTextIcon style={iconStyle} />
-              <Typography variant="h5" style={textStyle}>
-                Text Summarisation
-              </Typography>
-            </Paper>
-          </Link>
-        </Grid>
-        <Grid item xs={6} sm={4}>
-          <Link to="/Notes" style={{ textDecoration: 'none' }}>
-            <Paper style={boxStyle}>
-              <EditNoteIcon style={iconStyle} />
-              <Typography variant="h5" style={textStyle}>
-                Notes
-              </Typography>
-            </Paper>
-          </Link>
-        </Grid>
-        <Grid item xs={6} sm={4}>
-          <Link to="/Calendar" style={{ textDecoration: 'none' }}>
-            <Paper style={boxStyle}>
-              <CalendarMonthIcon style={iconStyle} />
-              <Typography variant="h5" style={textStyle}>
-                Calendar
-              </Typography>
-            </Paper>
-          </Link>
-        </Grid>
-        <Grid item xs={6} sm={4}>
-          <Link to="/ToDo" style={{ textDecoration: 'none' }}>
-            <Paper style={boxStyle}>
-              <ChecklistIcon style={iconStyle} />
-              <Typography variant="h5" style={textStyle}>
-                To-Do
-              </Typography>
-            </Paper>
-          </Link>
-        </Grid>
-        <Grid item xs={6} sm={4}>
-          <Link to="/Journal" style={{ textDecoration: 'none' }}>
-            <Paper style={boxStyle}>
-              <MenuBookIcon style={iconStyle} />
-              <Typography variant="h5" style={textStyle}>
-                Journal
-              </Typography>
-            </Paper>
-          </Link>
-        </Grid>
-        <Grid item xs={6} sm={4}>
-          <Link to="/Profile" style={{ textDecoration: 'none' }}>
-            <Paper style={boxStyle}>
-              <AccountCircleIcon style={iconStyle} />
-              <Typography variant="h5" style={textStyle}>
-                Profile
-              </Typography>
-            </Paper>
-          </Link>
-        </Grid>
+      <Grid container spacing={10}>
+        {boxData.map((box, index) => (
+          <Grid item xs={6} sm={4} key={index}>
+            <Link to={box.link} style={{ textDecoration: 'none' }}>
+              <Paper
+                style={{
+                  ...boxStyle,
+                  ...(hoveredBox === index ? boxStyleHover : {}),
+                }}
+                className='home-grid'
+                onMouseEnter={() => handleBoxHover(index)}
+                onMouseLeave={handleBoxLeave}
+              >
+                {box.icon}
+                <Typography variant="h5" style={textStyle}>
+                  {box.title}
+                </Typography>
+              </Paper>
+            </Link>
+          </Grid>
+        ))}
       </Grid>
     </div>
   );
