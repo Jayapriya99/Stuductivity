@@ -5,7 +5,8 @@ import { signOut } from "../../utils/auth";
 import { getUserData, updateUser } from "../../utils/manage-users";
 import { auth } from "../../firebase-config";
 import LogoutIcon from '@mui/icons-material/Logout';
-
+import { Link } from 'react-router-dom';
+import HomeIcon from '@mui/icons-material/Home';
 const styleCenter = {
   display: "flex",
   justifyContent: "space-evenly",
@@ -146,6 +147,17 @@ export default function Profile() {
           SIGN OUT
         </Button>
       </Box>
+
+      <Box
+      position="fixed"
+      style={{ transform: 'translate(-15px, -20px)' }}
+      bottom={20}
+      left={15}
+    >
+      <Link to="/Home" style={{ textDecoration: 'none', color: '#2E4C6D' }}>
+        <HomeIcon fontSize="large" />
+      </Link>
+    </Box>
       
     </div>
   );

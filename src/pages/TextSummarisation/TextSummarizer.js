@@ -2,6 +2,8 @@ import { Button, TextField, Box } from '@material-ui/core';
 import { Typography } from '@mui/material';
 import { useState } from "react";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import HomeIcon from '@mui/icons-material/Home';
 
 function TextSummarizer() {
   const [summary, setSummary] = useState("");
@@ -77,6 +79,17 @@ function TextSummarizer() {
           readOnly
         />
       </Box>
+
+      <Box
+        position="fixed"
+        style={{ transform: 'translate(-15px, -40px)' }}
+      >
+        <Link to="/Home" style={{ textDecoration: 'none', color: '#2E4C6D' }}>
+          <HomeIcon fontSize="large" />
+        </Link>
+      </Box>
+
+
     </div>
   )
 }

@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 // import "react-calendar/dist/Calendar.css";
 import "./calendar.css";
-
+import { Link } from 'react-router-dom';
+import HomeIcon from '@mui/icons-material/Home';
 import {
   collection,
   addDoc,
@@ -40,6 +41,13 @@ const styleCenter = {
   left: "50%",
   transform: "translate(42%, 50%)",
   p: 1,
+};
+
+const HomeIconContainer = {
+  position: "fixed",
+  bottom: "20px", // Adjust this value as needed
+  left: "10px", // Adjust this value as needed
+  zIndex: "1",
 };
 
 export const calendarCollection = collection(database, "calendar-data");
@@ -90,6 +98,7 @@ export default function CalendarPage({ database }) {
   );
 
   return (
+    <div>
     <Box
       style={{
         display: "flex",
@@ -132,56 +141,16 @@ export default function CalendarPage({ database }) {
         </Box>
       </Box>
       <TodoTable data={todoTableData} />
-      {/* <div className='grid-3'>
-        {calendarData.map((doc) => {
-          return (
-            <Box className='grid-2' 
-            sx={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr 1fr auto auto',
-              gridGap: 2,
-              alignItems: 'center',
-              padding: 2,
-              border: '1px solid #ccc',
-              borderRadius: '5px',
-              '& button': {
-                marginLeft: 1,
-                marginRight: 1,
-              },
-            }}
-            >
-              <Typography sx={{ display: 'flex', alignItems: 'center', whiteSpace: 'nowrap' }}>
-                {doc.title}
-              </Typography>
-              <Typography sx={{ display: 'flex', alignItems: 'center', whiteSpace: 'nowrap' }}>
-                {doc.date}
-              </Typography>
-              <Typography sx={{paddingLeft:5, paddingTop:2, paddingBottom:2, paddingRight: 20 }}>
-                {doc.time}
-              </Typography>
-              <ModeEditIcon
-              variant='filled'
-              color="primary"
-              // startIcon={<ModeEditIcon />}
-              style={{cmarginRight: 20}}
-              // onClick={() => navigate(`/EditTodo/${doc.id}`)}
-              >
-              </ModeEditIcon>
-              <DeleteIcon
-              variant='filled'
-              color="warning"
-              // onClick={() => TodoDelete(doc.id)}
-              style={{marginLeft: 20}}
-              >
-              DELETE
-              </DeleteIcon>
 
-            </Box>
-          )
-        })}
 
-     
-      </div> */}
     </Box>
+
+    <div style={HomeIconContainer}>
+        <Link to="/Home" style={{ textDecoration: 'none', color: '#2E4C6D' }}>
+          <HomeIcon fontSize="large" />
+        </Link>
+      </div>
+
+  </div>
   );
 }

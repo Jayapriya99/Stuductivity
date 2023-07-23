@@ -12,6 +12,8 @@ import {
   TextField,
   Button}from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { Link } from 'react-router-dom';
+import HomeIcon from '@mui/icons-material/Home';
 
 const style = {
   position: 'absolute',
@@ -172,6 +174,18 @@ export default function Notes(
           )
         })}
       </div>
+
+      <Box
+        position="fixed"
+        style={{ transform: 'translate(-15px, -20px)' }}
+        bottom={10}
+        left={0}
+      >
+        <Link to="/Home" style={{ textDecoration: 'none', color: '#2E4C6D' }}>
+          <HomeIcon fontSize="large" />
+        </Link>
+      </Box>
+
 
     </div>
     

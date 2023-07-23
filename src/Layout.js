@@ -7,6 +7,7 @@ import ChecklistIcon from '@mui/icons-material/Checklist';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import FormatColorTextIcon from '@mui/icons-material/FormatColorText';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import HomeIcon from '@mui/icons-material/Home';
 
 function Layout() {
   return (

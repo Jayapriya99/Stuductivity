@@ -15,6 +15,7 @@ import EditJournal from "./pages/Journal/EditJournal";
 import AddEvent from "./pages/Calendar/AddEvent";
 import EditEvent from "./pages/Calendar/EditEvent";
 import TextSum from "./pages/TextSummarisation/TextSummarizer";
+import Home from "./pages/Home/Home";
 
 import { Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
@@ -59,6 +60,7 @@ function AppRoutes() {
             element={<EditEvent database={database} />}
           />
           <Route path="/TextSummarizer" element={<TextSum />} />
+          <Route path="/Home" element={<Home />} />
           <Route path="/*" element={<h1>Seems you missed the page</h1>} />
         </Route>
       )}
